@@ -1,15 +1,17 @@
-﻿using PathPilot.Shared.Abstractions.Kernel.Types;
+﻿using PathPilot.Modules.Trip.Domain.Restaurant.ValueObjects;
+using PathPilot.Shared.Abstractions.Kernel.Types;
 
 namespace PathPilot.Modules.Trip.Domain.Restaurant.Entities;
 
-public class Restaurant : AggregateRoot// TODO: replace with entity id
+public sealed class Restaurant
 {
-    public string Name { get; private set; }
+    public EntityId Id { get; private set; }
+    public RestaurantName Name { get; private set; }
     public string Description { get; private set; }
     public bool IsOpened { get; private set; }
     public double AverageRate { get; private set; }
     public IEnumerable<MenuItem> MenuItems => _menuItems;
-    private IEnumerable<MenuItem> _menuItems;
+    private readonly IEnumerable<MenuItem> _menuItems;
     //Address
     //CuisineType
 
