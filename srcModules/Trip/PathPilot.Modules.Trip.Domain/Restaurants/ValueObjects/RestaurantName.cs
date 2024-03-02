@@ -1,6 +1,6 @@
-﻿using PathPilot.Modules.Trip.Domain.Restaurant.Exceptions;
+﻿using PathPilot.Modules.Trip.Domain.Restaurants.Exceptions;
 
-namespace PathPilot.Modules.Trip.Domain.Restaurant.ValueObjects;
+namespace PathPilot.Modules.Trip.Domain.Restaurants.ValueObjects;
 
 public sealed record RestaurantName
 {

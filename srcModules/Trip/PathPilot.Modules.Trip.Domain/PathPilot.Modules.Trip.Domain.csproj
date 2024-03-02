@@ -8,8 +8,8 @@
 
     <ItemGroup>
       <Folder Include="Accomodation\" />
-      <Folder Include="Attraction\" />
-      <Folder Include="Trip\" />
+      <Folder Include="Attractions\" />
+      <Folder Include="Trips\" />
     </ItemGroup>
 
     <ItemGroup>

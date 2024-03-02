@@ -1,8 +1,8 @@
-﻿using PathPilot.Modules.Trip.Domain.Restaurant.ValueObjects;
+﻿using PathPilot.Modules.Trip.Domain.Restaurants.ValueObjects;
 using PathPilot.Modules.Trip.Domain.ValueObjects;
 using PathPilot.Shared.Abstractions.Kernel.Types;
 
-namespace PathPilot.Modules.Trip.Domain.Restaurant.Entities;
+namespace PathPilot.Modules.Trip.Domain.Restaurants.Entities;
 
 public sealed class Restaurant
 {
