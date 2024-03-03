@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using PathPilot.Modules.Trip.Domain.Restaurants.Exceptions;
+﻿using PathPilot.Modules.Trip.Domain.Restaurants.Exceptions;
 using PathPilot.Modules.Trip.Domain.Restaurants.ValueObjects;
 using PathPilot.Modules.Trip.Domain.ValueObjects;
 using PathPilot.Shared.Abstractions.Kernel.Types;
@@ -16,7 +15,7 @@ public sealed class Restaurant
     public CuisineType CuisineType { get; private set; }
     public Address Address { get; private set; }
     public IEnumerable<MenuItem> MenuItems => _menuItems;
-    private readonly IEnumerable<MenuItem> _menuItems;
+    private readonly IList<MenuItem> _menuItems;
 
 
     private Restaurant(string id, RestaurantName name, RestaurantDescription description, 
@@ -31,13 +30,19 @@ public sealed class Restaurant
         CuisineType = cuisineType;
 
         Address = address ?? throw new MissingRestaurantAddressException();
-        _menuItems = menuItems ?? [];
+        _menuItems = menuItems is null ? [] : menuItems.ToList();
     }
 
     public static Restaurant Create(string id, string name, string description,
         string cuisineType, Address address, IEnumerable<MenuItem> menuItems)
         => new(id, name, description, true, 0,
             cuisineType, address, menuItems);
-    
-    //public 
+
+    public void AddMenuItems(params MenuItem[] menuItems)
+    {
+        foreach (var menuItem in menuItems)
+        {
+            _menuItems.Add(menuItem);
+        }
+    } 
 }
