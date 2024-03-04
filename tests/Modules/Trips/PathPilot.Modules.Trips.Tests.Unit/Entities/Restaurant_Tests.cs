@@ -1,10 +1,10 @@
-﻿using PathPilot.Modules.Trip.Domain.Restaurants.Entities;
-using PathPilot.Modules.Trip.Domain.Restaurants.Exceptions;
-using PathPilot.Modules.Trip.Domain.Restaurants.ValueObjects;
-using PathPilot.Modules.Trip.Domain.ValueObjects;
+﻿using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
+using PathPilot.Modules.Trips.Domain.Restaurants.Exceptions;
+using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
+using PathPilot.Modules.Trips.Domain.ValueObjects;
 using Shouldly;
 
-namespace PathPilot.Modules.Trip.Domain.Tests.Entities;
+namespace PathPilot.Modules.Trips.Domain.Tests.Entities;
 
 public class Restaurant_Tests
 {
@@ -12,9 +12,9 @@ public class Restaurant_Tests
     public void given_parameters_with_invalid_name_should_fail()
     {
         // Arrange
-        var id = "1234";
+        const string id = "1234";
         var name = string.Empty;
-        var description = "Description of the restaurant";
+        const string description = "Description of the restaurant";
         var cuisine = CuisineType.Italian;
         IEnumerable<MenuItem> menuItems = [];
         var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland", 0, 0);
@@ -31,9 +31,9 @@ public class Restaurant_Tests
     public void given_parameters_with_valid_parameters_should_pass()
     {
         // Arrange
-        var id = "1234";
-        var name = "Pasta Italiano";
-        var description = "Description of the restaurant";
+        const string id = "1234";
+        const string name = "Pasta Italiano";
+        const string description = "Description of the restaurant";
         var cuisine = CuisineType.Italian;
         var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland", 0, 0);
 
@@ -68,7 +68,7 @@ public class Restaurant_Tests
     public void given_menu_item_with_valid_name_should_pass()
     {
         // Arrange
-        var name = "Lasagne";
+        const string name = "Lasagne";
         
         // Act
         var menuitem = new MenuItem(name);
@@ -83,9 +83,9 @@ public class Restaurant_Tests
     public void given_menu_item_with_optional_parameters_should_has_values()
     {
         // Arrange
-        var name = "Lasagne";
-        var description = "Lasagna is an Italian dish consisting of layers of flat pasta, tomato sauce, meat, béchamel sauce, and mozzarella cheese, creating a savory and flavorful baked dish.";
-        var price = 21.37;
+        const string name = "Lasagne";
+        const string description = "Lasagna is an Italian dish consisting of layers of flat pasta, tomato sauce, meat, béchamel sauce, and mozzarella cheese, creating a savory and flavorful baked dish.";
+        const double price = 21.37;
         
         // Act
         var menuitem = new MenuItem(name, description, price);
@@ -121,9 +121,9 @@ public class Restaurant_Tests
     // Setup
     public Restaurant_Tests()
     {
-        var id = "1234";
-        var name = "Pasta Italiano";
-        var description = "Description of the restaurant";
+        const string id = "1234";
+        const string name = "Pasta Italiano";
+        const string description = "Description of the restaurant";
         var cuisine = CuisineType.Italian;
         var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland", 0, 0);
         _restaurant = Restaurant.Create(id, name, description, cuisine, address, null);

@@ -1,6 +1,6 @@
-﻿using PathPilot.Modules.Trip.Domain.Restaurants.Exceptions;
+﻿using PathPilot.Modules.Trips.Domain.Restaurants.Exceptions;
 
-namespace PathPilot.Modules.Trip.Domain.Restaurants.ValueObjects;
+namespace PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 
 public record RestaurantDescription
 {

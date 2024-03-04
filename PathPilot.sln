@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{36BD7AC3-2FE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{30404811-5AC1-413F-8EE5-A751E78963BF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trip", "Trip", "{0C4185D1-F871-4A01-A58B-73BECB910082}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trips", "Trips", "{0C4185D1-F871-4A01-A58B-73BECB910082}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trip.Domain", "srcModules\Trip\PathPilot.Modules.Trip.Domain\PathPilot.Modules.Trip.Domain.csproj", "{E52D95D0-D6E5-4E83-A2F9-BB23A51E7F37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.Domain", "srcModules\Trip\PathPilot.Modules.Trips.Domain\PathPilot.Modules.Trips.Domain.csproj", "{E52D95D0-D6E5-4E83-A2F9-BB23A51E7F37}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{A19780F2-5B4B-48DA-B2E2-6053569AEE92}"
 EndProject
@@ -23,7 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FC50
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trips", "Trips", "{64BDEC1B-1CA3-4DC5-ADC1-E7FF0AFCEA97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trip.Tests.Unit", "tests\Modules\Trips\PathPilot.Modules.Trip.Tests.Unit\PathPilot.Modules.Trip.Tests.Unit.csproj", "{7D1149A7-A1E0-4DFA-AD66-6DD055DBAA12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.Tests.Unit", "tests\Modules\Trips\PathPilot.Modules.Trips.Tests.Unit\PathPilot.Modules.Trips.Tests.Unit.csproj", "{7D1149A7-A1E0-4DFA-AD66-6DD055DBAA12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.Application", "src\Modules\Trips\PathPilot.Modules.Trips.Application\PathPilot.Modules.Trips.Application.csproj", "{D3519CEC-D12D-4B1F-99BE-1C25BCA3651C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{7D1149A7-A1E0-4DFA-AD66-6DD055DBAA12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D1149A7-A1E0-4DFA-AD66-6DD055DBAA12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D1149A7-A1E0-4DFA-AD66-6DD055DBAA12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3519CEC-D12D-4B1F-99BE-1C25BCA3651C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3519CEC-D12D-4B1F-99BE-1C25BCA3651C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3519CEC-D12D-4B1F-99BE-1C25BCA3651C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3519CEC-D12D-4B1F-99BE-1C25BCA3651C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +70,6 @@ Global
 		{FC50D5ED-E184-4BD3-B50C-E6BB05C2DC8A} = {A353DE2B-B21A-45DA-82E3-44AC0DC779CB}
 		{64BDEC1B-1CA3-4DC5-ADC1-E7FF0AFCEA97} = {FC50D5ED-E184-4BD3-B50C-E6BB05C2DC8A}
 		{7D1149A7-A1E0-4DFA-AD66-6DD055DBAA12} = {64BDEC1B-1CA3-4DC5-ADC1-E7FF0AFCEA97}
+		{D3519CEC-D12D-4B1F-99BE-1C25BCA3651C} = {0C4185D1-F871-4A01-A58B-73BECB910082}
 	EndGlobalSection
 EndGlobal

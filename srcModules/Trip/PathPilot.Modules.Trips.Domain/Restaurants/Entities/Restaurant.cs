@@ -1,9 +1,9 @@
-﻿using PathPilot.Modules.Trip.Domain.Restaurants.Exceptions;
-using PathPilot.Modules.Trip.Domain.Restaurants.ValueObjects;
-using PathPilot.Modules.Trip.Domain.ValueObjects;
+﻿using PathPilot.Modules.Trips.Domain.Restaurants.Exceptions;
+using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
+using PathPilot.Modules.Trips.Domain.ValueObjects;
 using PathPilot.Shared.Abstractions.Kernel.Types;
 
-namespace PathPilot.Modules.Trip.Domain.Restaurants.Entities;
+namespace PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 
 public sealed class Restaurant
 {
@@ -15,8 +15,7 @@ public sealed class Restaurant
     public CuisineType CuisineType { get; private set; }
     public Address Address { get; private set; }
     public IEnumerable<MenuItem> MenuItems => _menuItems;
-    private readonly IList<MenuItem> _menuItems;
-
+    private readonly List<MenuItem> _menuItems;
 
     private Restaurant(string id, RestaurantName name, RestaurantDescription description, 
         bool isOpened, double averageRate, CuisineType cuisineType, 
@@ -44,5 +43,9 @@ public sealed class Restaurant
         {
             _menuItems.Add(menuItem);
         }
-    } 
+    }
+
+    public void Close() => IsOpened = false;
+
+    public void Open() => IsOpened = true;
 }

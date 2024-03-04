@@ -7,7 +7,7 @@
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
-        <RootNamespace>PathPilot.Modules.Trip.Domain.Tests</RootNamespace>
+        <RootNamespace>PathPilot.Modules.Trips.Domain.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,7 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\srcModules\Trip\PathPilot.Modules.Trip.Domain\PathPilot.Modules.Trip.Domain.csproj" />
+      <ProjectReference Include="..\..\..\..\srcModules\Trip\PathPilot.Modules.Trips.Domain\PathPilot.Modules.Trips.Domain.csproj" />
     </ItemGroup>
 
 </Project>

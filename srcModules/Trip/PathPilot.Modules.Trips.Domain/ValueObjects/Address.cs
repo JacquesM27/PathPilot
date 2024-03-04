@@ -1,6 +1,6 @@
-﻿using PathPilot.Modules.Trip.Domain.ValueObjects.Exceptions;
+﻿using PathPilot.Modules.Trips.Domain.ValueObjects.Exceptions;
 
-namespace PathPilot.Modules.Trip.Domain.ValueObjects;
+namespace PathPilot.Modules.Trips.Domain.ValueObjects;
 
 public sealed class Address
 {
@@ -9,10 +9,10 @@ public sealed class Address
     public string BuildingNumber { get; private set; }
     public string PostCode { get; private set; }
     public string Country { get; private set; }
-    public decimal Longitude { get; private set; }
-    public decimal Latitude { get; private set; }
+    public decimal? Longitude { get; private set; }
+    public decimal? Latitude { get; private set; }
 
-    public Address(string city, string street, string buildingNumber, string postCode, string country, decimal longitude, decimal latitude)
+    public Address(string city, string street, string buildingNumber, string postCode, string country, decimal? longitude, decimal? latitude)
     {
         if (string.IsNullOrWhiteSpace(city))
             throw new EmptyAddressCityException();
