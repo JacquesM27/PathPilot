@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using PathPilot.Shared.Infrastructure.Commands;
+using PathPilot.Shared.Infrastructure.Queries;
 
 namespace PathPilot.Shared.Infrastructure;
 
@@ -11,6 +12,7 @@ internal static class Extensions
     {
         
         services.AddCommands(assemblies);
+        services.AddQueries(assemblies);
 
         return services;
     }

@@ -12,7 +12,7 @@ public sealed class Address
     public decimal? Longitude { get; private set; }
     public decimal? Latitude { get; private set; }
 
-    public Address(string city, string street, string buildingNumber, string postCode, string country, decimal? longitude, decimal? latitude)
+    public Address(string city, string street, string buildingNumber, string postCode, string country, decimal? longitude = null, decimal? latitude = null)
     {
         if (string.IsNullOrWhiteSpace(city))
             throw new EmptyAddressCityException();

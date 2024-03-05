@@ -1,13 +1,13 @@
-﻿using PathPilot.Modules.Trips.Domain.Restaurants.Exceptions;
+﻿using PathPilot.Modules.Trips.Domain.ValueObjects;
+using PathPilot.Modules.Trips.Domain.Restaurants.Exceptions;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
-using PathPilot.Modules.Trips.Domain.ValueObjects;
 using PathPilot.Shared.Abstractions.Kernel.Types;
 
 namespace PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 
 public sealed class Restaurant
 {
-    public EntityId Id { get; private set; }
+    public EntityId Id { get; }
     public RestaurantName Name { get; private set; }
     public RestaurantDescription Description { get; private set; }
     public bool IsOpened { get; private set; }
@@ -15,27 +15,22 @@ public sealed class Restaurant
     public CuisineType CuisineType { get; private set; }
     public Address Address { get; private set; }
     public IEnumerable<MenuItem> MenuItems => _menuItems;
-    private readonly List<MenuItem> _menuItems;
+    private readonly List<MenuItem> _menuItems = [];
 
-    private Restaurant(string id, RestaurantName name, RestaurantDescription description, 
-        bool isOpened, double averageRate, CuisineType cuisineType, 
-        Address address, IEnumerable<MenuItem> menuItems)
+    private Restaurant(RestaurantName name, RestaurantDescription description, 
+        bool isOpened, double averageRate, CuisineType cuisineType)
     {
-        Id = id;
         Name = name;
         Description = description;
         IsOpened = isOpened;
         AverageRate = averageRate;
         CuisineType = cuisineType;
-
-        Address = address ?? throw new MissingRestaurantAddressException();
-        _menuItems = menuItems is null ? [] : menuItems.ToList();
     }
 
-    public static Restaurant Create(string id, string name, string description,
-        string cuisineType, Address address, IEnumerable<MenuItem> menuItems)
-        => new(id, name, description, true, 0,
-            cuisineType, address, menuItems);
+    public static Restaurant Create(string name, string description,
+        string cuisineType)
+        => new(name, description, true, 0,
+            cuisineType);
 
     public void AddMenuItems(params MenuItem[] menuItems)
     {
@@ -45,6 +40,9 @@ public sealed class Restaurant
         }
     }
 
+    public void UpdateAddress(Address address)
+        => Address = address ?? throw new MissingRestaurantAddressException();
+    
     public void Close() => IsOpened = false;
 
     public void Open() => IsOpened = true;

@@ -20,7 +20,7 @@ public class Restaurant_Tests
         var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland", 0, 0);
 
         // Act
-        var exception = Record.Exception(() => Restaurant.Create(id, name, description, cuisine, address, null));
+        var exception = Record.Exception(() => Restaurant.Create(name, description, cuisine));
         
         // Arrange
         exception.ShouldNotBeNull();
@@ -31,23 +31,20 @@ public class Restaurant_Tests
     public void given_parameters_with_valid_parameters_should_pass()
     {
         // Arrange
-        const string id = "1234";
         const string name = "Pasta Italiano";
         const string description = "Description of the restaurant";
         var cuisine = CuisineType.Italian;
-        var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland", 0, 0);
 
         // Act
-        var restaurant = Restaurant.Create(id, name, description, cuisine, address, null);
+        var restaurant = Restaurant.Create(name, description, cuisine);
         
         // Arrange
-        restaurant.Id.Value.ShouldBe(id);
         restaurant.Name.Value.ShouldBe(name);
         restaurant.Description.Value.ShouldBe(description);
         restaurant.CuisineType.Value.ShouldBe(cuisine);
         restaurant.MenuItems.ShouldNotBeNull();
         restaurant.MenuItems.ShouldBeEmpty();
-        restaurant.Address.ShouldBe(address);
+        restaurant.Address.ShouldBeNull();
     }
 
     [Fact]
@@ -115,6 +112,20 @@ public class Restaurant_Tests
         _restaurant.MenuItems.ShouldContain(menuItems.First());
     }
 
+    [Fact]
+    public void given_restaurant_should_update_address_properly()
+    {
+        // Arrange
+        var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland");
+        
+        // Act
+        _restaurant.UpdateAddress(address);
+        
+        // Assert
+        _restaurant.Address.ShouldNotBeNull();
+        _restaurant.Address.ShouldBe(address);
+    }
+
 
     private readonly Restaurant _restaurant;
 
@@ -126,6 +137,6 @@ public class Restaurant_Tests
         const string description = "Description of the restaurant";
         var cuisine = CuisineType.Italian;
         var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland", 0, 0);
-        _restaurant = Restaurant.Create(id, name, description, cuisine, address, null);
+        _restaurant = Restaurant.Create(name, description, cuisine);
     }
 }
