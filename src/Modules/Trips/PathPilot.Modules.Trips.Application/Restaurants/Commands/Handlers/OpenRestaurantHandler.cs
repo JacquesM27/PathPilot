@@ -4,7 +4,7 @@ using PathPilot.Shared.Abstractions.Commands;
 
 namespace PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
 
-public sealed class OpenRestaurantHandler(
+internal sealed class OpenRestaurantHandler(
     IRestaurantRepository restaurantRepository
 ) : ICommandHandler<OpenRestaurant>
 {

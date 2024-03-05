@@ -14,4 +14,8 @@
       <Folder Include="Restaurants\Queries\" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="PathPilot.Modules.Trips.Tests.Unit"/>
+    </ItemGroup>
+    
 </Project>

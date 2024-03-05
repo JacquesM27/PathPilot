@@ -1,6 +1,7 @@
 ﻿using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Exceptions;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
+using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Modules.Trips.Domain.ValueObjects;
 using Shouldly;
 
@@ -132,11 +133,6 @@ public class Restaurant_Tests
     // Setup
     public Restaurant_Tests()
     {
-        const string id = "1234";
-        const string name = "Pasta Italiano";
-        const string description = "Description of the restaurant";
-        var cuisine = CuisineType.Italian;
-        var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland", 0, 0);
-        _restaurant = Restaurant.Create(name, description, cuisine);
+        _restaurant = RestaurantHelper.GetRestaurant();
     }
 }
