@@ -7,56 +7,58 @@ using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Shared.Abstractions.Commands;
 using Shouldly;
+using Xunit;
 
-namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers;
-
-public class CloseRestaurantHandlerTests
+namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
 {
-    private readonly IRestaurantRepository _restaurantRepository;
-    private readonly ICommandHandler<CloseRestaurant> _commandHandler;
-    private readonly Restaurant _restaurant;
-    
-    public CloseRestaurantHandlerTests()
+    public class CloseRestaurantHandlerTests
     {
-        _restaurantRepository = Substitute.For<IRestaurantRepository>();
-        _commandHandler = new CloseRestaurantHandler(_restaurantRepository);
-        _restaurant = RestaurantHelper.GetRestaurant();
-    }
-    
-    private Task Act(CloseRestaurant command) => _commandHandler.HandleAsync(command);
-
-    [Fact]
-    public async Task given_missing_restaurant_should_fail()
-    {
-        // Arrange
-        const string id = "this is the id";
-        var command = new CloseRestaurant(id);
+        private readonly IRestaurantRepository _restaurantRepository;
+        private readonly ICommandHandler<CloseRestaurant> _commandHandler;
+        private readonly Restaurant _restaurant;
         
-        // Act
-        var exception = await Record.ExceptionAsync(() => Act(command));
-
-        // Assert        
-        exception.ShouldNotBeNull();
-        exception.ShouldBeOfType<RestaurantNotFoundException>();
-        await _restaurantRepository.Received(1).GetAsync(id);
-        await _restaurantRepository.Received(0).UpdateAsync(default);
-    }
-
-    [Fact]
-    public async Task given_restaurant_should_be_closed()
-    {
-        // Arrange
-        const string id = "this is the id";
-        var command = new CloseRestaurant(id);
-        _restaurantRepository.GetAsync(id).Returns(_restaurant);
+        public CloseRestaurantHandlerTests()
+        {
+            _restaurantRepository = Substitute.For<IRestaurantRepository>();
+            _commandHandler = new CloseRestaurantHandler(_restaurantRepository);
+            _restaurant = RestaurantHelper.GetRestaurant();
+        }
         
-        // Act
-        await Act(command);
+        private Task Act(CloseRestaurant command) => _commandHandler.HandleAsync(command);
 
-        // Assert        
-        _restaurant.IsOpened.ShouldBeFalse();
-        await _restaurantRepository.Received(1).GetAsync(id);
-        await _restaurantRepository.Received(1).UpdateAsync(_restaurant);
-        
+        [Fact]
+        public async Task HandleCloseRestaurant_ShouldThrowRestaurantNotFoundException_WhenRestaurantNotFound()
+        {
+            // Arrange
+            const string id = "this is the id";
+            var command = new CloseRestaurant(id);
+            
+            // Act
+            var exception = await Record.ExceptionAsync(() => Act(command));
+
+            // Assert        
+            exception.ShouldNotBeNull();
+            exception.ShouldBeOfType<RestaurantNotFoundException>();
+            await _restaurantRepository.Received(1).GetAsync(id);
+            await _restaurantRepository.Received(0).UpdateAsync(default);
+        }
+
+        [Fact]
+        public async Task HandleCloseRestaurant_ShouldCloseRestaurant()
+        {
+            // Arrange
+            const string id = "this is the id";
+            var command = new CloseRestaurant(id);
+            _restaurantRepository.GetAsync(id).Returns(_restaurant);
+            
+            // Act
+            await Act(command);
+
+            // Assert        
+            _restaurant.IsOpened.ShouldBeFalse();
+            await _restaurantRepository.Received(1).GetAsync(id);
+            await _restaurantRepository.Received(1).UpdateAsync(_restaurant);
+            
+        }
     }
 }

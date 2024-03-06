@@ -26,7 +26,7 @@ public class OpenRestaurantHandlerTests
     private Task Act(OpenRestaurant command) => _commandHandler.HandleAsync(command);
     
     [Fact]
-    public async Task given_missing_restaurant_should_fail()
+    public async Task HandleOpenRestaurant_ShouldThrowRestaurantNotFoundException_WhenRestaurantNotFound()
     {
         // Arrange
         const string id = "this is the id";
@@ -43,7 +43,7 @@ public class OpenRestaurantHandlerTests
     }
 
     [Fact]
-    public async Task given_restaurant_should_be_closed()
+    public async Task HandleOpenRestaurant_ShouldOpenRestaurant()
     {
         // Arrange
         const string id = "this is the id";

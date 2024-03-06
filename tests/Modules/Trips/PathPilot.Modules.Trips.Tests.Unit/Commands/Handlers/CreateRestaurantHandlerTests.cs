@@ -5,6 +5,7 @@ using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
+using Xunit;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
 {
@@ -20,7 +21,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
         }
 
         [Fact]
-        public async Task given_restaurant_should_create_restaurant()
+        public async Task HandleCreateRestaurant_ShouldCreateRestaurant()
         {
             // Arrange
             var command = new CreateRestaurant("Pasta Italiano", "Description of the restaurant", CuisineType.Italian);
