@@ -6,8 +6,8 @@ namespace PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 public interface IRestaurantRepository
 {
     Task<IEnumerable<Restaurant>> BrowseAsync();
+    Task<IEnumerable<Restaurant>> BrowseAsync(IEnumerable<EntityId> ids);
     Task<Restaurant> GetAsync(EntityId id);
     Task AddAsync(Restaurant restaurant);
     Task UpdateAsync(Restaurant restaurant);
-    Task DeleteAsync(Restaurant restaurant);
 }
