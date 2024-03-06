@@ -40,7 +40,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
             _restaurantRepository.GetAsync(command.RestaurantId).Returns(_restaurant);
 
             // Act
-            await _commandHandler.HandleAsync(command);
+            await Act(command);
 
             // Assert
             await _restaurantRepository.Received(1).UpdateAsync(Arg.Is<Restaurant>(r =>
@@ -67,7 +67,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
             _restaurantRepository.GetAsync(command.RestaurantId)!.Returns((Restaurant)null!);
 
             // Act
-            var exception = await Record.ExceptionAsync(() => _commandHandler.HandleAsync(command));
+            var exception = await Record.ExceptionAsync(() => Act(command));
 
             // Assert
             await _restaurantRepository.Received(1).GetAsync("TestRestaurantId");

@@ -12,11 +12,19 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers;
 
 public class OpenRestaurantHandlerTests
 {
-    private Task Act(OpenRestaurant command) => _commandHandler.HandleAsync(command);
-    
     private readonly IRestaurantRepository _restaurantRepository;
     private readonly ICommandHandler<OpenRestaurant> _commandHandler;
+    private readonly Restaurant _restaurant;
 
+    public OpenRestaurantHandlerTests()
+    {
+        _restaurantRepository = Substitute.For<IRestaurantRepository>();
+        _commandHandler = new OpenRestaurantHandler(_restaurantRepository);
+        _restaurant = RestaurantHelper.GetRestaurant();
+    }
+    
+    private Task Act(OpenRestaurant command) => _commandHandler.HandleAsync(command);
+    
     [Fact]
     public async Task given_missing_restaurant_should_fail()
     {
@@ -51,13 +59,4 @@ public class OpenRestaurantHandlerTests
         await _restaurantRepository.Received(1).UpdateAsync(_restaurant);
         
     }
-    
-    public OpenRestaurantHandlerTests()
-    {
-        _restaurantRepository = Substitute.For<IRestaurantRepository>();
-        _commandHandler = new OpenRestaurantHandler(_restaurantRepository);
-        _restaurant = RestaurantHelper.GetRestaurant();
-    }
-
-    private readonly Restaurant _restaurant;
 }
