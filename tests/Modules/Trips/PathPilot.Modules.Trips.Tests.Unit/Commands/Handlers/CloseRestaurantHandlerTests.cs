@@ -59,5 +59,5 @@ public class CloseRestaurantHandlerTests
         _restaurant = RestaurantHelper.GetRestaurant();
     }
 
-    private Restaurant _restaurant;
+    private readonly Restaurant _restaurant;
 }
