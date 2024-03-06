@@ -105,7 +105,7 @@ public class Restaurant_Tests
         ];
         
         // Act
-        _restaurant.AddMenuItems(menuItems);
+        _restaurant.UpdateMenu(menuItems);
         
         // Assert
         _restaurant.MenuItems.ShouldNotBeEmpty();

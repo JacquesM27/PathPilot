@@ -15,7 +15,7 @@ public sealed class Restaurant
     public CuisineType CuisineType { get; private set; }
     public Address Address { get; private set; }
     public IEnumerable<MenuItem> MenuItems => _menuItems;
-    private readonly List<MenuItem> _menuItems = [];
+    private readonly HashSet<MenuItem> _menuItems = [];
 
     private Restaurant(RestaurantName name, RestaurantDescription description, 
         bool isOpened, double averageRate, CuisineType cuisineType)
@@ -32,11 +32,19 @@ public sealed class Restaurant
         => new(name, description, true, 0,
             cuisineType);
 
-    public void AddMenuItems(params MenuItem[] menuItems)
+    public void UpdateMenu(IEnumerable<MenuItem> menuItems)
     {
         foreach (var menuItem in menuItems)
         {
-            _menuItems.Add(menuItem);
+            var existingMenuItem = _menuItems.FirstOrDefault(item => item.Name == menuItem.Name);
+        
+            if (existingMenuItem != null)
+            {
+                _menuItems.Remove(existingMenuItem);
+                _menuItems.Add(menuItem);
+            }
+            else
+                _menuItems.Add(menuItem);
         }
     }
 

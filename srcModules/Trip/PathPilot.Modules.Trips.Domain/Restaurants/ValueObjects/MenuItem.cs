@@ -17,5 +17,13 @@ public sealed record MenuItem
         Description = description;
         Price = price;
     }
+
+    public override int GetHashCode()   
+        => Name.GetHashCode();
     
+    public bool Equals(MenuItem? other)
+    {
+        if (other is null) return false;
+        return Name == other.Name;
+    }
 }
