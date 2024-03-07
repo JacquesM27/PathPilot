@@ -1,6 +1,6 @@
-﻿namespace PathPilot.Modules.Trips.Application.Restaurants.DTO;
+﻿using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 
-public class RestaurantDto
-{
-    // TODO: add properties
-}
+namespace PathPilot.Modules.Trips.Application.Restaurants.DTO;
+
+public sealed record RestaurantDto(string Id, string Name, string Description, bool IsOpened, double AverageRate,
+    string CuisineType, AddressDto? Address, IEnumerable<MenuItemDto> MenuItems);
