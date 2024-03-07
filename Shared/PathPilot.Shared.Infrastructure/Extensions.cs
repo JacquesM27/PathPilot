@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using PathPilot.Shared.Infrastructure.Commands;
+using PathPilot.Shared.Infrastructure.Events;
 using PathPilot.Shared.Infrastructure.Queries;
 
 namespace PathPilot.Shared.Infrastructure;
@@ -13,6 +14,8 @@ internal static class Extensions
         
         services.AddCommands(assemblies);
         services.AddQueries(assemblies);
+        //services.AddEvents(assemblies);
+        // TODO: add in memory messaging
 
         return services;
     }
