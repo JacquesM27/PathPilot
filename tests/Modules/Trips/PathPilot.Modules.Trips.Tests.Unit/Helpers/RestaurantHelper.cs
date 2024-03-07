@@ -13,4 +13,16 @@ internal static class RestaurantHelper
         var restaurant = Restaurant.Create(name, description, cuisine);
         return restaurant;
     }
+
+    internal static IEnumerable<Restaurant> GetRestaurants()
+    {
+        var restaurants = new List<Restaurant>
+        {
+            GetRestaurant(),
+            Restaurant.Create("Burger Palace", "Home of delicious burgers", CuisineType.Chinese),
+            Restaurant.Create("Sushi Delight", "Authentic Japanese sushi experience", CuisineType.Polish)
+        };
+
+        return restaurants;
+    }
 }
