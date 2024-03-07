@@ -13,13 +13,14 @@ public sealed class Restaurant
     public bool IsOpened { get; private set; }
     public double AverageRate { get; private set; }
     public CuisineType CuisineType { get; private set; }
-    public Address Address { get; private set; }
+    public Address? Address { get; private set; }
     public IEnumerable<MenuItem> MenuItems => _menuItems;
     private readonly HashSet<MenuItem> _menuItems = [];
 
     private Restaurant(RestaurantName name, RestaurantDescription description, 
         bool isOpened, double averageRate, CuisineType cuisineType)
     {
+        Id = new EntityId(string.Empty);
         Name = name;
         Description = description;
         IsOpened = isOpened;
@@ -34,17 +35,11 @@ public sealed class Restaurant
 
     public void UpdateMenu(IEnumerable<MenuItem> menuItems)
     {
+        _menuItems.Clear();
+        
         foreach (var menuItem in menuItems)
         {
-            var existingMenuItem = _menuItems.FirstOrDefault(item => item.Name == menuItem.Name);
-        
-            if (existingMenuItem != null)
-            {
-                _menuItems.Remove(existingMenuItem);
-                _menuItems.Add(menuItem);
-            }
-            else
-                _menuItems.Add(menuItem);
+            _menuItems.Add(menuItem);
         }
     }
 

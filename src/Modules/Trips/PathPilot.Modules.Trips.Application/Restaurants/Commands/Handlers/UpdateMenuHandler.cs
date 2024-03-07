@@ -11,13 +11,20 @@ public sealed class UpdateMenuHandler(
 {
     public async Task HandleAsync(UpdateMenu command)
     {
-        if (command.Items is null || !command.Items.Any())
-            throw new NoMenuItemsToAddException(command.RestaurantId);
+        var duplications = command.Items
+            .GroupBy(item => item.Name)
+            .Where(group => group.Count() > 1)
+            .Select(group => group.Key).ToList();
+
+        if (duplications.Count != 0)
+            throw new DuplicatedMenuItemToAddException(command.RestaurantId, duplications);
+        
+        var itemsToUpdate = command.Items ?? [];
         
         var restaurant = await restaurantRepository.GetAsync(command.RestaurantId)
             ?? throw new RestaurantNotFoundException(command.RestaurantId);
         
-        restaurant.UpdateMenu(MapToMenuItems(command.Items));
+        restaurant.UpdateMenu(MapToMenuItems(itemsToUpdate));
         await restaurantRepository.UpdateAsync(restaurant);
     }
     
