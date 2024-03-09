@@ -15,4 +15,8 @@
       <ProjectReference Include="..\PathPilot.Shared.Abstractions\PathPilot.Shared.Abstractions.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspnetCore.App" />
+    </ItemGroup>
+
 </Project>

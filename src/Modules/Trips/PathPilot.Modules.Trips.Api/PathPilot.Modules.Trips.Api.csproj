@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspnetCore.App" />
+      <ProjectReference Include="..\PathPilot.Modules.Trips.Infrastructure\PathPilot.Modules.Trips.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.App
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.Infrastructure", "src\Modules\Trips\PathPilot.Modules.Trips.Infrastructure\PathPilot.Modules.Trips.Infrastructure.csproj", "{54A2B8F6-21AE-42CA-A80D-B4EA97B6EAEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.Api", "src\Modules\Trips\PathPilot.Modules.Trips.Api\PathPilot.Modules.Trips.Api.csproj", "{9DA53376-1DF2-4F08-9144-F8E3870E112A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{54A2B8F6-21AE-42CA-A80D-B4EA97B6EAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54A2B8F6-21AE-42CA-A80D-B4EA97B6EAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54A2B8F6-21AE-42CA-A80D-B4EA97B6EAEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DA53376-1DF2-4F08-9144-F8E3870E112A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DA53376-1DF2-4F08-9144-F8E3870E112A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DA53376-1DF2-4F08-9144-F8E3870E112A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DA53376-1DF2-4F08-9144-F8E3870E112A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,5 +84,6 @@ Global
 		{7D1149A7-A1E0-4DFA-AD66-6DD055DBAA12} = {64BDEC1B-1CA3-4DC5-ADC1-E7FF0AFCEA97}
 		{D3519CEC-D12D-4B1F-99BE-1C25BCA3651C} = {0C4185D1-F871-4A01-A58B-73BECB910082}
 		{54A2B8F6-21AE-42CA-A80D-B4EA97B6EAEB} = {0C4185D1-F871-4A01-A58B-73BECB910082}
+		{9DA53376-1DF2-4F08-9144-F8E3870E112A} = {0C4185D1-F871-4A01-A58B-73BECB910082}
 	EndGlobalSection
 EndGlobal
