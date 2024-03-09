@@ -10,4 +10,15 @@
       <ProjectReference Include="..\PathPilot.Modules.Trips.Infrastructure\PathPilot.Modules.Trips.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="module.trips.json" />
+      <Content Include="module.trips.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="module.trips.development.json" />
+      <Content Include="module.trips.development.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

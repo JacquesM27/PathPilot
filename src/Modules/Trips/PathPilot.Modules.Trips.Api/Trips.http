@@ -1,0 +1,4 @@
+@Url = http://localhost:5196/trips-module
+
+GET {{Url}}
+Accept: application/json

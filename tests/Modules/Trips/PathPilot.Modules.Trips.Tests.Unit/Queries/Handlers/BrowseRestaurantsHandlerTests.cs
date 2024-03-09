@@ -48,7 +48,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Queries.Handlers
             // Arrange
             var ids = new[] { "1", "2", "3" };
             var query = new BrowseRestaurants(ids);
-            var filteredRestaurants = _restaurants.Where(r => ids.Contains(r.Id)).ToArray();
+            var filteredRestaurants = _restaurants.Where(r => ids.Contains(r.Id.Value)).ToArray();
             _restaurantRepository.BrowseAsync(Arg.Any<IEnumerable<EntityId>>()).Returns(filteredRestaurants);
 
             // Act
@@ -56,7 +56,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Queries.Handlers
 
             // Assert
             restaurantDtos.ShouldNotBeNull();
-            restaurantDtos.ShouldBeOfType<List<RestaurantDto>>();
+            restaurantDtos.ShouldBeOfType<RestaurantDto[]>();
             restaurantDtos.Length.ShouldBe(filteredRestaurants.Count());
         }
     }

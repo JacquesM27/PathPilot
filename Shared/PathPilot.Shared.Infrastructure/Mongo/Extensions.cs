@@ -8,7 +8,7 @@ internal static class Extensions
 {
     internal static IServiceCollection AddMongo(this IServiceCollection services)
     {
-        var options = services.GetOptions<MongoOptions>("mongo");
+        var options = services.GetOptions<MongoOptions>("MongoDB");
 
         services.AddSingleton(sp =>
         {
