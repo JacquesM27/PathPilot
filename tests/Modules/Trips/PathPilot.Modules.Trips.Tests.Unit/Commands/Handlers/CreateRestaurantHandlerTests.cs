@@ -5,7 +5,6 @@ using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
-using Xunit;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
 {

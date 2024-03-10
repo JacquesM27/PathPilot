@@ -8,13 +8,13 @@ namespace PathPilot.Modules.Trips.Application.Restaurants.Queries.Handlers;
 
 internal sealed class GetRestaurantHandler(
     IRestaurantRepository restaurantRepository
-    ) : IQueryHandler<GetRestaurant, RestaurantDto>
+    ) : IQueryHandler<GetRestaurant, RestaurantDetailsDto>
 {
-    public async Task<RestaurantDto> HandleAsync(GetRestaurant query)
+    public async Task<RestaurantDetailsDto> HandleAsync(GetRestaurant query)
     {
         var restaurant = await restaurantRepository.GetAsync(query.Id)
                          ?? throw new RestaurantNotFoundException(query.Id);
 
-        return restaurant.ToDto();
+        return restaurant.ToDetailsDto();
     }
 }

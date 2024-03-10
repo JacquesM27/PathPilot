@@ -7,7 +7,7 @@ namespace PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 
 public sealed class Restaurant
 {
-    public EntityId Id { get; }
+    public EntityId Id { get; private set; }
     public RestaurantName Name { get; private set; }
     public RestaurantDescription Description { get; private set; }
     public bool IsOpened { get; private set; }

@@ -15,7 +15,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Queries.Handlers;
 public class GetRestaurantHandlerTests
 {
     private readonly IRestaurantRepository _restaurantRepository;
-    private readonly IQueryHandler<GetRestaurant,RestaurantDto> _queryHandler;
+    private readonly IQueryHandler<GetRestaurant,RestaurantDetailsDto> _queryHandler;
     private readonly Restaurant _restaurant;
 
     public GetRestaurantHandlerTests()
@@ -25,7 +25,7 @@ public class GetRestaurantHandlerTests
         _restaurant = RestaurantHelper.GetRestaurant();
     }
 
-    private Task<RestaurantDto> Act(GetRestaurant query) => _queryHandler.HandleAsync(query);
+    private Task<RestaurantDetailsDto> Act(GetRestaurant query) => _queryHandler.HandleAsync(query);
     
     [Fact]
     public async Task HandleGetRestaurant_ShouldThrowRestaurantNotFoundException_WhenRestaurantNotFound()
