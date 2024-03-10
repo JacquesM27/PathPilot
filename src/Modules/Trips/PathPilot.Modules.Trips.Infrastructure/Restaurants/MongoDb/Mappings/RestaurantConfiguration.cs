@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Driver;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Infrastructure.Restaurants.MongoDb.Repositories;
+using PathPilot.Shared.Infrastructure.Mongo;
 
 namespace PathPilot.Modules.Trips.Infrastructure.Restaurants.MongoDb.Mappings;
 
@@ -28,7 +28,7 @@ internal static class RestaurantConfiguration
         BsonClassMap.RegisterClassMap<Restaurant>(cm =>
         {
             cm.AutoMap();
-            cm.MapIdMember(c => c.Id).SetIdGenerator(StringObjectIdGenerator.Instance);
+            cm.MapIdMember(c => c.Id).SetIdGenerator(EntityIdObjectIdGenerator.Instance);
         });
     }
 }

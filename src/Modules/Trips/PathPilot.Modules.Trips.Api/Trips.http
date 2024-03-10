@@ -2,3 +2,13 @@
 
 GET {{Url}}
 Accept: application/json
+
+###
+POST {{Url}}/restaurants
+Content-Type: application/json
+
+{
+  "Name": "Pasta Italiano",
+  "Description": "Description of the restaurant",
+  "CuisineType": "Italian"
+}
