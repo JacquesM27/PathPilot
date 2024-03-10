@@ -15,7 +15,7 @@ internal static class RestaurantMapping
             restaurant.AverageRate, 
             restaurant.CuisineType,
             restaurant.Address?.ToDto(),
-            restaurant.MenuItems.Select(x => x.ToDto()));
+            restaurant.MenuItems?.Select(x => x.ToDto()) ?? []);
 
     internal static RestaurantDto ToDto(this Restaurant restaurant)
         => new(restaurant.Id,

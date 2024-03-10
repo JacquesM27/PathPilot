@@ -31,4 +31,41 @@ internal class RestaurantsController(
         return NoContent();
         //TODO: add in memory cache with id and return CreatedAtAction
     }
+
+    [HttpPut("{id}")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public async Task<ActionResult> CloseAsync(string id)
+    {
+        //TODO: add closing policy only for owner - when user module will be completed
+        await commandDispatcher.SendAsync(new CloseRestaurant(id));
+        return NoContent();
+    }
+    
+    [HttpPut("{id}")]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public async Task<ActionResult> OpenAsync(string id)
+    {
+        await commandDispatcher.SendAsync(new OpenRestaurant(id));
+        return NoContent();
+    }
+
+    [HttpPut]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public async Task<ActionResult> UpdateAddressAsync(UpdateAddress command)
+    {
+        await commandDispatcher.SendAsync(command);
+        return NoContent();
+    }
+
+    [HttpPut]
+    [ProducesResponseType(204)]
+    [ProducesResponseType(404)]
+    public async Task<ActionResult> UpdateMenuAsync(UpdateMenu command)
+    {
+        await commandDispatcher.SendAsync(command);
+        return NoContent();
+    }
 }

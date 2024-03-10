@@ -12,3 +12,7 @@ Content-Type: application/json
   "Description": "Description of the restaurant",
   "CuisineType": "Italian"
 }
+
+###
+GET {{Url}}/restaurants
+Accept: application/json
