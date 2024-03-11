@@ -1,9 +1,11 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PathPilot.Shared.Abstractions.Modules;
 using PathPilot.Shared.Infrastructure.Api;
 using PathPilot.Shared.Infrastructure.Commands;
+using PathPilot.Shared.Infrastructure.Exceptions;
 using PathPilot.Shared.Infrastructure.Modules;
 using PathPilot.Shared.Infrastructure.Mongo;
 using PathPilot.Shared.Infrastructure.Queries;
@@ -19,6 +21,8 @@ internal static class Extensions
 
         services.AddModuleInfo(modules);
         services.AddModuleRequest(assemblies);
+
+        services.AddErrorHandling();
         
         services.AddCommands(assemblies);
         services.AddQueries(assemblies);
@@ -32,5 +36,12 @@ internal static class Extensions
             .AddInternalControllersVisibility();
 
         return services;
+    }
+
+    internal static WebApplication UseInfrastructure(this WebApplication app)
+    {
+        app.UseErrorHandling();
+
+        return app;
     }
 }

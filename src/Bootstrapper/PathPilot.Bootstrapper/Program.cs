@@ -17,6 +17,8 @@ foreach (var module in modules)
 
 var app = builder.Build();
 
+app.UseInfrastructure();
+
 app.MapControllers();
 app.MapModuleInfo();
 

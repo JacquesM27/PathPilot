@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Net;
+using Microsoft.AspNetCore.Http;
+using PathPilot.Shared.Abstractions.Exceptions;
 
 namespace PathPilot.Shared.Infrastructure.Exceptions;
 
-internal sealed class ErrorHandlerMiddleware
+internal sealed class ErrorHandlerMiddleware(
+    IExceptionCompositionRoot exceptionCompositionRoot)
+    : IMiddleware
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
@@ -18,6 +22,11 @@ internal sealed class ErrorHandlerMiddleware
 
     private async Task HandleErrorAsync(HttpContext context, Exception exception)
     {
-        
+        var errorResponse = exceptionCompositionRoot.Map(exception);
+        context.Response.StatusCode = (int)(errorResponse?.StatusCode ?? HttpStatusCode.InternalServerError);
+        var response = errorResponse?.Response;
+        if (response is null)
+            return;
+        await context.Response.WriteAsJsonAsync(response);
     }
 }
