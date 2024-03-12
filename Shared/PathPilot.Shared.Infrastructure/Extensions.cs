@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PathPilot.Shared.Abstractions.Modules;
+using PathPilot.Shared.Abstractions.Storage;
 using PathPilot.Shared.Infrastructure.Api;
 using PathPilot.Shared.Infrastructure.Commands;
 using PathPilot.Shared.Infrastructure.Events;
@@ -11,6 +12,7 @@ using PathPilot.Shared.Infrastructure.Messaging;
 using PathPilot.Shared.Infrastructure.Modules;
 using PathPilot.Shared.Infrastructure.Mongo;
 using PathPilot.Shared.Infrastructure.Queries;
+using PathPilot.Shared.Infrastructure.Storage;
 
 [assembly:InternalsVisibleTo("PathPilot.Bootstrapper")]
 namespace PathPilot.Shared.Infrastructure;
@@ -20,6 +22,8 @@ internal static class Extensions
     internal static IServiceCollection AddInfrastructure(this IServiceCollection services,
         IList<Assembly> assemblies, IList<IModule> modules)
     {
+        services.AddMemoryCache();
+        services.AddSingleton<IRequestStorage, RequestStorage>();
 
         services.AddModuleInfo(modules);
         services.AddModuleRequest(assemblies);
