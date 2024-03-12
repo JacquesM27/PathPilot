@@ -1,9 +1,9 @@
-﻿namespace PathPilot.Shared.Abstractions.Commands;
+namespace PathPilot.Shared.Abstractions.Commands;
 
 /// <summary>
 /// Marker interface for handling commands <see cref="ICommandDispatcher"/>
 /// </summary>
 public interface ICommand
 {
-    
+    public string CommandId { get; init; }
 }

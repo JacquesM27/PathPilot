@@ -4,18 +4,20 @@ using PathPilot.Modules.Trips.Application.Restaurants.DTO;
 using PathPilot.Modules.Trips.Application.Restaurants.Queries;
 using PathPilot.Shared.Abstractions.Commands;
 using PathPilot.Shared.Abstractions.Queries;
+using PathPilot.Shared.Abstractions.Storage;
 
 namespace PathPilot.Modules.Trips.Api.Controllers;
 
 internal class RestaurantsController(
     ICommandDispatcher commandDispatcher,
-    IQueryDispatcher queryDispatcher
+    IQueryDispatcher queryDispatcher,
+    IRequestStorage requestStorage
     ) : BaseController
 {
     [HttpGet("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
-    public async Task<ActionResult<RestaurantDetailsDto>> GetAsync(string id)
+    public async Task<ActionResult<RestaurantDetailsDto>> Get(string id)
         => OkOrNotFound(await queryDispatcher.QueryAsync(new GetRestaurant(id)));
 
     [HttpGet]
@@ -28,8 +30,8 @@ internal class RestaurantsController(
     public async Task<ActionResult> AddAsync(CreateRestaurant command)
     {
         await commandDispatcher.SendAsync(command);
-        return NoContent();
-        //TODO: add in memory cache with id and return CreatedAtAction
+        var id = requestStorage.Get<string>(command.CommandId);
+        return CreatedAtAction(nameof(Get), id);
     }
 
     [HttpPut("{id}")]
