@@ -23,3 +23,6 @@ app.MapControllers();
 app.MapModuleInfo();
 
 app.Run();
+
+
+public partial class Program { }
