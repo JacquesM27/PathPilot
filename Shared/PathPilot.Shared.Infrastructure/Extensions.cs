@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using PathPilot.Shared.Abstractions.Modules;
 using PathPilot.Shared.Infrastructure.Api;
 using PathPilot.Shared.Infrastructure.Commands;
+using PathPilot.Shared.Infrastructure.Events;
 using PathPilot.Shared.Infrastructure.Exceptions;
+using PathPilot.Shared.Infrastructure.Messaging;
 using PathPilot.Shared.Infrastructure.Modules;
 using PathPilot.Shared.Infrastructure.Mongo;
 using PathPilot.Shared.Infrastructure.Queries;
@@ -26,10 +28,12 @@ internal static class Extensions
         
         services.AddCommands(assemblies);
         services.AddQueries(assemblies);
-        services.AddMongo();
-        //services.AddEvents(assemblies);
-        // TODO: add in memory messaging
+        
+        services.AddEvents(assemblies);
+        services.AddMessaging();
 
+        services.AddMongo();
+        
         services
             .AddControllers()
             .DisableDisabledModules(services)
