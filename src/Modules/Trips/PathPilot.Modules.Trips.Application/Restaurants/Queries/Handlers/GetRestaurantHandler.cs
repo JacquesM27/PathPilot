@@ -9,7 +9,7 @@ namespace PathPilot.Modules.Trips.Application.Restaurants.Queries.Handlers;
 internal sealed class GetRestaurantHandler(
     IRestaurantRepository restaurantRepository
     ) : IQueryHandler<GetRestaurant, RestaurantDetailsDto>
-{//TODO: add tests
+{
     public async Task<RestaurantDetailsDto> HandleAsync(GetRestaurant query)
     {
         var restaurant = await restaurantRepository.GetAsync(query.Id)
