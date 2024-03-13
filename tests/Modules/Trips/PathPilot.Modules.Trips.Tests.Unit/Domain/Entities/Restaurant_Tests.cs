@@ -5,7 +5,7 @@ using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Modules.Trips.Domain.ValueObjects;
 using Shouldly;
 
-namespace PathPilot.Modules.Trips.Domain.Tests.Entities;
+namespace PathPilot.Modules.Trips.Domain.Tests.Domain.Entities;
 
 public class Restaurant_Tests
 {

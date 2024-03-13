@@ -25,4 +25,7 @@ app.MapModuleInfo();
 app.Run();
 
 
-public partial class Program { }
+namespace PathPilot.Bootstrapper
+{
+    public partial class Program { }
+}

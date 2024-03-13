@@ -8,7 +8,7 @@ using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Shared.Abstractions.Commands;
 using Shouldly;
 
-namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
+namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
 {
     public class UpdateAddressHandlerTests
     {
@@ -29,8 +29,9 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
         public async Task HandleAsync_ShouldUpdateRestaurantAddress()
         {
             // Arrange
+            var id = Guid.NewGuid();
             var command = new UpdateAddress(
-                "TestRestaurantId",
+                id,
                 "New York",
                 "Broadway",
                 "123",
@@ -49,15 +50,16 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
                 r.Address.BuildingNumber == command.BuildingNumber &&
                 r.Address.PostCode == command.PostCode &&
                 r.Address.Country == command.Country));
-            await _restaurantRepository.Received(1).GetAsync("TestRestaurantId");
+            await _restaurantRepository.Received(1).GetAsync(id);
         }
 
         [Fact]
         public async Task HandleAsync_ShouldThrowRestaurantNotFoundException_WhenRestaurantNotFound()
         {
             // Arrange
+            var id = Guid.NewGuid();
             var command = new UpdateAddress(
-                "TestRestaurantId",
+                id,
                 "New York",
                 "Broadway",
                 "123",
@@ -70,7 +72,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
             var exception = await Record.ExceptionAsync(() => Act(command));
 
             // Assert
-            await _restaurantRepository.Received(1).GetAsync("TestRestaurantId");
+            await _restaurantRepository.Received(1).GetAsync(id);
             await _restaurantRepository.Received(0).UpdateAsync(default!);
             exception.ShouldNotBeNull();
             exception.ShouldBeOfType<RestaurantNotFoundException>();

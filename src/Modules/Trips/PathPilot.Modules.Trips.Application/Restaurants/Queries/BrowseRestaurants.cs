@@ -3,4 +3,4 @@ using PathPilot.Shared.Abstractions.Queries;
 
 namespace PathPilot.Modules.Trips.Application.Restaurants.Queries;
 
-public sealed record BrowseRestaurants(IEnumerable<string>? ids = null) : IQuery<IEnumerable<RestaurantDto>>;
+public sealed record BrowseRestaurants(IEnumerable<Guid>? ids = null) : IQuery<IEnumerable<RestaurantDto>>;

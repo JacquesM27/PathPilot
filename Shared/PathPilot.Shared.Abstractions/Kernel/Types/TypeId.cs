@@ -1,8 +1,8 @@
 ﻿namespace PathPilot.Shared.Abstractions.Kernel.Types;
 
-public abstract class TypeId(string value) : IEquatable<TypeId>
+public abstract class TypeId(Guid value) : IEquatable<TypeId>
 {
-    public string Value => value;
+    public Guid Value => value;
     
     public bool Equals(TypeId? other)
     {
@@ -21,7 +21,7 @@ public abstract class TypeId(string value) : IEquatable<TypeId>
 
     public override int GetHashCode() => Value.GetHashCode();
 
-    public static implicit operator string(TypeId typeId) => typeId.Value;
+    public static implicit operator Guid(TypeId typeId) => typeId.Value;
 
     public static bool operator ==(TypeId? t1, TypeId? t2)
     {

@@ -8,7 +8,7 @@ using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Shared.Abstractions.Commands;
 using Shouldly;
 
-namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers;
+namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers;
 
 public class OpenRestaurantHandlerTests
 {
@@ -29,7 +29,7 @@ public class OpenRestaurantHandlerTests
     public async Task HandleOpenRestaurant_ShouldThrowRestaurantNotFoundException_WhenRestaurantNotFound()
     {
         // Arrange
-        const string id = "this is the id";
+        var id = Guid.NewGuid();
         var command = new OpenRestaurant(id);
         
         // Act
@@ -46,7 +46,7 @@ public class OpenRestaurantHandlerTests
     public async Task HandleOpenRestaurant_ShouldOpenRestaurant()
     {
         // Arrange
-        const string id = "this is the id";
+        var id = Guid.NewGuid();
         var command = new OpenRestaurant(id);
         _restaurantRepository.GetAsync(id).Returns(_restaurant);
         

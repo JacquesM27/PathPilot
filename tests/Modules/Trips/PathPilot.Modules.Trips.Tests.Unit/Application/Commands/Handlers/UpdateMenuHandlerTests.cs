@@ -9,7 +9,7 @@ using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Shared.Abstractions.Commands;
 using Shouldly;
 
-namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
+namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
 {
     public class UpdateMenuHandlerTests
     {
@@ -30,8 +30,9 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
         public async Task HandleUpdateMenu_ShouldUpdateRestaurantMenu()
         {
             // Arrange
+            var id = Guid.NewGuid();
             var command = new UpdateMenu(
-                "TestRestaurantId",
+                id,
                 new List<MenuItemToUpdate>
                 {
                     new ("Pizza", "Delicious pizza", 10.99),
@@ -51,15 +52,16 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
                         item.Name == menuItem.Name &&
                         item.Description == menuItem.Description &&
                         Equals(item.Price, menuItem.Price)))));
-            await _restaurantRepository.Received(1).GetAsync("TestRestaurantId");
+            await _restaurantRepository.Received(1).GetAsync(id);
         }
 
         [Fact]
         public async Task HandleUpdateMenu_ShouldThrowRestaurantNotFoundException_WhenRestaurantNotFound()
         {
             // Arrange
+            var id = Guid.NewGuid();
             var command = new UpdateMenu(
-                "TestRestaurantId",
+                id,
                 new List<MenuItemToUpdate>
                 {
                     new ("Pizza", "Delicious pizza", 10.99),
@@ -72,7 +74,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
             var exception = await Record.ExceptionAsync(() => Act(command));
 
             // Assert
-            await _restaurantRepository.Received(1).GetAsync("TestRestaurantId");
+            await _restaurantRepository.Received(1).GetAsync(id);
             await _restaurantRepository.Received(0).UpdateAsync(default!);
             exception.ShouldNotBeNull();
             exception.ShouldBeOfType<RestaurantNotFoundException>();
@@ -82,6 +84,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
         public async Task HandleUpdateMenu_ShouldUpdateMenu()
         {
             // Arrange
+            var id = Guid.NewGuid();
             var menuItem1 = new MenuItem("Pizza", "Delicious pizza", 10.99);
             var menuItem2 = new MenuItem("Burger", "Tasty burger", 8.99);
             _restaurant.UpdateMenu(
@@ -91,7 +94,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
             ]);
             
             var command = new UpdateMenu(
-                "TestRestaurantId",
+                id,
                 new List<MenuItemToUpdate>
                 {
                     new ("Pizza", "Updated pizza description", 11.99),
@@ -119,13 +122,14 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
             
             _restaurant.MenuItems.Count().ShouldBe(2);
             _restaurant.MenuItems.ShouldNotContain(item => item.Name == "Burger");
-            await _restaurantRepository.Received(1).GetAsync("TestRestaurantId");
+            await _restaurantRepository.Received(1).GetAsync(id);
         }
 
         [Fact]
         public async Task HandleUpdateMenu_ShouldClearMenu_WhenPassedEmptyList()
         {
             // Arrange
+            var id = Guid.NewGuid();
             var menuItem1 = new MenuItem("Pizza", "Delicious pizza", 10.99);
             var menuItem2 = new MenuItem("Burger", "Tasty burger", 8.99);
             _restaurant.UpdateMenu(
@@ -135,7 +139,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
             ]);
         
             var command = new UpdateMenu(
-                "TestRestaurantId",
+                id,
                 []
             );
         
@@ -147,7 +151,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
             // Assert
             await _restaurantRepository.Received(1).UpdateAsync(Arg.Is<Restaurant>(r =>
                 !r.MenuItems.Any()));
-            await _restaurantRepository.Received(1).GetAsync("TestRestaurantId");
+            await _restaurantRepository.Received(1).GetAsync(id);
             _restaurant.MenuItems.ShouldBeEmpty();
         }
     }

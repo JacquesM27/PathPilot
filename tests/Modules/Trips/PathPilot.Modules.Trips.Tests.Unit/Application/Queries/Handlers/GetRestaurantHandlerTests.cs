@@ -1,16 +1,16 @@
 ﻿using NSubstitute;
 using PathPilot.Modules.Trips.Application.Restaurants.DTO;
 using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
-using PathPilot.Modules.Trips.Application.Restaurants.Mapping;
 using PathPilot.Modules.Trips.Application.Restaurants.Queries;
 using PathPilot.Modules.Trips.Application.Restaurants.Queries.Handlers;
+using PathPilot.Modules.Trips.Application.Shared.Mappings;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Shared.Abstractions.Queries;
 using Shouldly;
 
-namespace PathPilot.Modules.Trips.Domain.Tests.Queries.Handlers;
+namespace PathPilot.Modules.Trips.Domain.Tests.Application.Queries.Handlers;
 
 public class GetRestaurantHandlerTests
 {
@@ -31,7 +31,7 @@ public class GetRestaurantHandlerTests
     public async Task HandleGetRestaurant_ShouldThrowRestaurantNotFoundException_WhenRestaurantNotFound()
     {
         // Arrange
-        const string id = "this is the id";
+        var id = Guid.NewGuid();
         var query = new GetRestaurant(id);
         
         // Act
@@ -47,7 +47,7 @@ public class GetRestaurantHandlerTests
     public async Task HandleGetRestaurant_ShouldOpenRestaurant()
     {
         // Arrange
-        const string id = "this is the id";
+        var id = Guid.NewGuid();
         var command = new GetRestaurant(id);
         _restaurantRepository.GetAsync(id).Returns(_restaurant);
         

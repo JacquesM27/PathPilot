@@ -14,7 +14,7 @@ internal static class RestaurantConfiguration
 
     internal static IServiceCollection AddRestaurantRepository(this IServiceCollection services)
     {
-        ConfigureEntity();
+        // ConfigureEntity();
         services.AddSingleton<IRestaurantRepository>(sp =>
         {
             var database = sp.GetService<IMongoDatabase>();
@@ -23,12 +23,12 @@ internal static class RestaurantConfiguration
         return services;
     }
     
-    private static void ConfigureEntity()
-    {
-        BsonClassMap.RegisterClassMap<Restaurant>(cm =>
-        {
-            cm.AutoMap();
-            cm.MapIdMember(c => c.Id).SetIdGenerator(EntityIdObjectIdGenerator.Instance);
-        });
-    }
+    // private static void ConfigureEntity()
+    // {
+    //     BsonClassMap.RegisterClassMap<Restaurant>(cm =>
+    //     {
+    //         cm.AutoMap();
+    //         cm.MapIdMember(c => c.Id).SetIdGenerator(EntityIdObjectIdGenerator.Instance);
+    //     });
+    // }
 }

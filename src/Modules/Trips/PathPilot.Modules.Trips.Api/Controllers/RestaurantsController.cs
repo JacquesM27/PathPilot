@@ -4,20 +4,18 @@ using PathPilot.Modules.Trips.Application.Restaurants.DTO;
 using PathPilot.Modules.Trips.Application.Restaurants.Queries;
 using PathPilot.Shared.Abstractions.Commands;
 using PathPilot.Shared.Abstractions.Queries;
-using PathPilot.Shared.Abstractions.Storage;
 
 namespace PathPilot.Modules.Trips.Api.Controllers;
 
 internal class RestaurantsController(
     ICommandDispatcher commandDispatcher,
-    IQueryDispatcher queryDispatcher,
-    IRequestStorage requestStorage
+    IQueryDispatcher queryDispatcher
     ) : BaseController
 {
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
-    public async Task<ActionResult<RestaurantDetailsDto>> Get(string id)
+    public async Task<ActionResult<RestaurantDetailsDto>> Get(Guid id)
         => OkOrNotFound(await queryDispatcher.QueryAsync(new GetRestaurant(id)));
 
     [HttpGet]
@@ -30,14 +28,13 @@ internal class RestaurantsController(
     public async Task<ActionResult> AddAsync(CreateRestaurant command)
     {
         await commandDispatcher.SendAsync(command);
-        var id = requestStorage.Get<string>(command.CommandId);
-        return CreatedAtAction(nameof(Get), id);
+        return CreatedAtAction(nameof(Get), command.Id);
     }
 
     [HttpPut("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
-    public async Task<ActionResult> CloseAsync(string id)
+    public async Task<ActionResult> CloseAsync(Guid id)
     {
         //TODO: add closing policy only for owner - when user module will be completed
         await commandDispatcher.SendAsync(new CloseRestaurant(id));
@@ -47,7 +44,7 @@ internal class RestaurantsController(
     [HttpPut("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
-    public async Task<ActionResult> OpenAsync(string id)
+    public async Task<ActionResult> OpenAsync(Guid id)
     {
         await commandDispatcher.SendAsync(new OpenRestaurant(id));
         return NoContent();

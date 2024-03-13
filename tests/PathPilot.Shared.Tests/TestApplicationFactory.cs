@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using PathPilot.Bootstrapper;
 
 namespace PathPilot.Shared.Tests;
 

@@ -5,21 +5,18 @@ using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
-using PathPilot.Shared.Abstractions.Storage;
 
-namespace PathPilot.Modules.Trips.Domain.Tests.Commands.Handlers
+namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
 {
     public class CreateRestaurantHandlerTests
     {
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly ICommandHandler<CreateRestaurant> _commandHandler;
-        private readonly IRequestStorage _requestStorage;
 
         public CreateRestaurantHandlerTests()
         {
             _restaurantRepository = Substitute.For<IRestaurantRepository>();
-            _requestStorage = Substitute.For<IRequestStorage>();
-            _commandHandler = new CreateRestaurantHandler(_restaurantRepository, _requestStorage);
+            _commandHandler = new CreateRestaurantHandler(_restaurantRepository);
         }
 
         [Fact]

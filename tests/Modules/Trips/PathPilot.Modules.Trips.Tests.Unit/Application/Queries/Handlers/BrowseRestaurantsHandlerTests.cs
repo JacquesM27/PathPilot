@@ -9,7 +9,7 @@ using PathPilot.Shared.Abstractions.Kernel.Types;
 using PathPilot.Shared.Abstractions.Queries;
 using Shouldly;
 
-namespace PathPilot.Modules.Trips.Domain.Tests.Queries.Handlers
+namespace PathPilot.Modules.Trips.Domain.Tests.Application.Queries.Handlers
 {
     public class BrowseRestaurantsHandlerTests
     {
@@ -46,7 +46,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Queries.Handlers
         public async Task HandleBrowseRestaurants_ShouldReturnFilteredRestaurants_WhenIdsProvided()
         {
             // Arrange
-            var ids = new[] { "1", "2", "3" };
+            var ids = new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
             var query = new BrowseRestaurants(ids);
             var filteredRestaurants = _restaurants.Where(r => ids.Contains(r.Id.Value)).ToArray();
             _restaurantRepository.BrowseAsync(Arg.Any<IEnumerable<EntityId>>()).Returns(filteredRestaurants);
