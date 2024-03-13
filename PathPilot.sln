@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Bootstrapper", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Shared.Tests", "tests\PathPilot.Shared.Tests\PathPilot.Shared.Tests.csproj", "{6C0448F9-E1EF-4404-8366-E4B8D52FE845}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.Tests.Integration", "tests\Modules\Trips\PathPilot.Modules.Trips.Tests.Integration\PathPilot.Modules.Trips.Tests.Integration.csproj", "{0394873B-9463-4C74-9577-F462737A8BB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{6C0448F9-E1EF-4404-8366-E4B8D52FE845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C0448F9-E1EF-4404-8366-E4B8D52FE845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C0448F9-E1EF-4404-8366-E4B8D52FE845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0394873B-9463-4C74-9577-F462737A8BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0394873B-9463-4C74-9577-F462737A8BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0394873B-9463-4C74-9577-F462737A8BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0394873B-9463-4C74-9577-F462737A8BB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,5 +108,6 @@ Global
 		{6884C638-B456-4E6A-80BE-B5F42C38D895} = {36BD7AC3-2FE2-4A67-B922-F1A23AE0CA81}
 		{ABBD73BB-E20A-42EF-9E52-D34220D3CA8A} = {6884C638-B456-4E6A-80BE-B5F42C38D895}
 		{6C0448F9-E1EF-4404-8366-E4B8D52FE845} = {A353DE2B-B21A-45DA-82E3-44AC0DC779CB}
+		{0394873B-9463-4C74-9577-F462737A8BB3} = {64BDEC1B-1CA3-4DC5-ADC1-E7FF0AFCEA97}
 	EndGlobalSection
 EndGlobal
