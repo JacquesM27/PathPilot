@@ -24,8 +24,16 @@ internal class RestaurantsController(
         => Ok(await queryDispatcher.QueryAsync(new BrowseRestaurants()));
 
     [HttpPost]
-    [ProducesResponseType(200)]
+    [ProducesResponseType(201)]
     public async Task<ActionResult> AddAsync(CreateRestaurant command)
+    {
+        await commandDispatcher.SendAsync(command);
+        return CreatedAtAction(nameof(Get), command.Id);
+    }
+    
+    [HttpPost("detailed")]
+    [ProducesResponseType(201)]
+    public async Task<ActionResult> AddAsync(CreateDetailedRestaurant command)
     {
         await commandDispatcher.SendAsync(command);
         return CreatedAtAction(nameof(Get), command.Id);

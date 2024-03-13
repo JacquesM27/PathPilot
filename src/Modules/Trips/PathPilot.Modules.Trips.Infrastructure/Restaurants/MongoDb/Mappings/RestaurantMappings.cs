@@ -2,5 +2,5 @@
 
 public class RestaurantMappings
 {
-    
+    //TODO add mapping and tests
 }

@@ -14,5 +14,5 @@ internal sealed class RestaurantDocument
     public double AverageRate { get; set; }
     public string CuisineType { get; set; }
     public AddressDocument Address { get; set; }
-    
+    public List<MenuItemDocument> MenuItems { get; set; }
 }
