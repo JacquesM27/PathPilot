@@ -15,10 +15,10 @@ public sealed class Restaurant
     public CuisineType CuisineType { get; private set; }
     public Address? Address { get; private set; }
     public IEnumerable<MenuItem> MenuItems => _menuItems;
-    private readonly HashSet<MenuItem> _menuItems;
+    private readonly HashSet<MenuItem> _menuItems = [];
 
     private Restaurant(EntityId id, RestaurantName name, RestaurantDescription description, 
-        bool isOpened, double averageRate, CuisineType cuisineType, Address? address = null, HashSet<MenuItem>? menuItems = null)
+        bool isOpened, double averageRate, CuisineType cuisineType, Address? address = null, IEnumerable<MenuItem>? menuItems = null)
     {
         Id = id;
         Name = name;
@@ -27,7 +27,7 @@ public sealed class Restaurant
         AverageRate = averageRate;
         CuisineType = cuisineType;
         Address = address;
-        _menuItems = menuItems ?? [];
+        UpdateMenu(menuItems ?? []);
     }
 
     public static Restaurant Create(string name, string description,
@@ -36,7 +36,7 @@ public sealed class Restaurant
             cuisineType);
 
     public static Restaurant CreateDetailed(string name, string description,
-        string cuisineType, Address address, HashSet<MenuItem> menuItems)
+        string cuisineType, Address address, IEnumerable<MenuItem> menuItems)
         => new(Guid.NewGuid(), name, description,true, 0,
         cuisineType, address, menuItems);
 

@@ -5,5 +5,4 @@ namespace PathPilot.Shared.Abstractions.Commands;
 /// </summary>
 public interface ICommand
 {
-    public string CommandId { get; init; }
 }

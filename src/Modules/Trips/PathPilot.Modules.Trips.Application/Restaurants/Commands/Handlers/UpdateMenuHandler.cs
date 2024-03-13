@@ -1,4 +1,6 @@
-﻿using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
+﻿using PathPilot.Modules.Trips.Application.Restaurants.Commands.Shared;
+using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
+using PathPilot.Modules.Trips.Application.Restaurants.Mapping;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
@@ -24,10 +26,7 @@ public sealed class UpdateMenuHandler(
         var restaurant = await restaurantRepository.GetAsync(command.RestaurantId)
             ?? throw new RestaurantNotFoundException(command.RestaurantId);
         
-        restaurant.UpdateMenu(MapToMenuItems(itemsToUpdate));
+        restaurant.UpdateMenu(itemsToUpdate.MapToMenuItems());
         await restaurantRepository.UpdateAsync(restaurant);
     }
-    
-    private static IEnumerable<MenuItem> MapToMenuItems(IEnumerable<MenuItemToUpdate> itemsToAdd)
-        => itemsToAdd.Select(item => new MenuItem(item.Name, item.Description, item.Price));
 }

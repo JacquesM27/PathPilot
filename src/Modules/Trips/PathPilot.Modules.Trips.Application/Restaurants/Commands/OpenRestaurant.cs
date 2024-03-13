@@ -2,4 +2,4 @@
 
 namespace PathPilot.Modules.Trips.Application.Restaurants.Commands;
 
-public sealed record OpenRestaurant(Guid Id) : Command;
+public sealed record OpenRestaurant(Guid Id) : ICommand;

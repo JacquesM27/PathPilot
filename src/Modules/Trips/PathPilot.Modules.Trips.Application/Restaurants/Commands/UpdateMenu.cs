@@ -1,7 +1,6 @@
-﻿using PathPilot.Shared.Abstractions.Commands;
+﻿using PathPilot.Modules.Trips.Application.Restaurants.Commands.Shared;
+using PathPilot.Shared.Abstractions.Commands;
 
 namespace PathPilot.Modules.Trips.Application.Restaurants.Commands;
 
-public sealed record UpdateMenu(Guid RestaurantId, IEnumerable<MenuItemToUpdate> Items) : Command;
-
-public sealed record MenuItemToUpdate(string Name, string? Description = null, double? Price = null);
+public sealed record UpdateMenu(Guid RestaurantId, IEnumerable<MenuItemRecord> Items) : ICommand;

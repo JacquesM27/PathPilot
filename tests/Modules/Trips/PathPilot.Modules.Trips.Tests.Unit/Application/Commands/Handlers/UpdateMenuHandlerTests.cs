@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
+using PathPilot.Modules.Trips.Application.Restaurants.Commands.Shared;
 using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
@@ -33,7 +34,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
             var id = Guid.NewGuid();
             var command = new UpdateMenu(
                 id,
-                new List<MenuItemToUpdate>
+                new List<MenuItemRecord>
                 {
                     new ("Pizza", "Delicious pizza", 10.99),
                     new ("Burger", "Tasty burger", 8.99)
@@ -62,7 +63,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
             var id = Guid.NewGuid();
             var command = new UpdateMenu(
                 id,
-                new List<MenuItemToUpdate>
+                new List<MenuItemRecord>
                 {
                     new ("Pizza", "Delicious pizza", 10.99),
                     new ("Burger", "Tasty burger", 8.99)
@@ -85,8 +86,8 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
         {
             // Arrange
             var id = Guid.NewGuid();
-            var menuItem1 = new MenuItem("Pizza", "Delicious pizza", 10.99);
-            var menuItem2 = new MenuItem("Burger", "Tasty burger", 8.99);
+            var menuItem1 = new Restaurants.ValueObjects.MenuItem("Pizza", "Delicious pizza", 10.99);
+            var menuItem2 = new Restaurants.ValueObjects.MenuItem("Burger", "Tasty burger", 8.99);
             _restaurant.UpdateMenu(
             [
                 menuItem1,
@@ -95,7 +96,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
             
             var command = new UpdateMenu(
                 id,
-                new List<MenuItemToUpdate>
+                new List<MenuItemRecord>
                 {
                     new ("Pizza", "Updated pizza description", 11.99),
                     new ("Pasta", "Delicious pasta", 12.99),
@@ -130,8 +131,8 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
         {
             // Arrange
             var id = Guid.NewGuid();
-            var menuItem1 = new MenuItem("Pizza", "Delicious pizza", 10.99);
-            var menuItem2 = new MenuItem("Burger", "Tasty burger", 8.99);
+            var menuItem1 = new Restaurants.ValueObjects.MenuItem("Pizza", "Delicious pizza", 10.99);
+            var menuItem2 = new Restaurants.ValueObjects.MenuItem("Burger", "Tasty burger", 8.99);
             _restaurant.UpdateMenu(
             [
                 menuItem1,
