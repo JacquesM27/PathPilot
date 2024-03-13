@@ -11,4 +11,9 @@
       <ProjectReference Include="..\PathPilot.Modules.Trips.Application\PathPilot.Modules.Trips.Application.csproj" />
     </ItemGroup>
 
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="PathPilot.Modules.Trips.Tests.Unit"/>
+    </ItemGroup>
+    
 </Project>

@@ -16,6 +16,7 @@ internal sealed class LocationDocument
 {
     [BsonElement]
     [BsonDefaultValue("Point")]
-    public string Type { get; }
+    public string Type => "Point";
+
     public decimal?[] Coordinates { get; set; }
 }

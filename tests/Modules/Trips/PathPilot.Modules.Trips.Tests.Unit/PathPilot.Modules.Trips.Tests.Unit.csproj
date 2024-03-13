@@ -28,6 +28,12 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\srcModules\Trip\PathPilot.Modules.Trips.Domain\PathPilot.Modules.Trips.Domain.csproj" />
       <ProjectReference Include="..\..\..\..\src\Modules\Trips\PathPilot.Modules.Trips.Application\PathPilot.Modules.Trips.Application.csproj" />
+      <ProjectReference Include="..\..\..\..\src\Modules\Trips\PathPilot.Modules.Trips.Infrastructure\PathPilot.Modules.Trips.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\" />
+      <Folder Include="Domain\" />
     </ItemGroup>
 
 </Project>
