@@ -5,6 +5,7 @@ using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
+using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
 {
@@ -33,6 +34,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
                 r.Name == command.Name &&
                 r.Description == command.Description &&
                 r.CuisineType == command.CuisineType));
+            command.Id.ShouldNotBe(Guid.Empty);
         }
     }
 }
