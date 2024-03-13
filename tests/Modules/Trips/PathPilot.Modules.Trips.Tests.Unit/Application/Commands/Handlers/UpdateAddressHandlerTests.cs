@@ -1,11 +1,13 @@
 ﻿using NSubstitute;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
+using PathPilot.Modules.Trips.Application.Restaurants.Events;
 using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Shared.Abstractions.Commands;
+using PathPilot.Shared.Abstractions.Messaging;
 using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
@@ -13,13 +15,15 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
     public class UpdateAddressHandlerTests
     {
         private readonly ICommandHandler<UpdateAddress> _commandHandler;
+        private readonly IMessageBroker _messageBroker;
         private readonly IRestaurantRepository _restaurantRepository;
         private readonly Restaurant _restaurant;
 
         public UpdateAddressHandlerTests()
         {
             _restaurantRepository = Substitute.For<IRestaurantRepository>();
-            _commandHandler = new UpdateAddressHandler(_restaurantRepository);
+            _messageBroker = Substitute.For<IMessageBroker>();
+            _commandHandler = new UpdateAddressHandler(_restaurantRepository, _messageBroker);
             _restaurant = RestaurantHelper.GetRestaurant();
         }
         
@@ -50,7 +54,17 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
                 r.Address.BuildingNumber == command.BuildingNumber &&
                 r.Address.PostCode == command.PostCode &&
                 r.Address.Country == command.Country));
+            
             await _restaurantRepository.Received(1).GetAsync(id);
+            await _messageBroker.Received(1).PublishAsync(Arg.Any<RestaurantAddressCreated>());
+            await _messageBroker.Received(1).PublishAsync(Arg.Is<RestaurantAddressCreated>(message =>
+                message.RestaurantId == _restaurant.Id &&
+                message.City == command.City &&
+                message.Street == command.Street &&
+                message.BuildingNumber == command.BuildingNumber &&
+                message.PostCode == command.PostCode &&
+                message.Country == command.Country
+            ));
         }
 
         [Fact]
@@ -74,6 +88,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
             // Assert
             await _restaurantRepository.Received(1).GetAsync(id);
             await _restaurantRepository.Received(0).UpdateAsync(default!);
+            await _messageBroker.Received(0).PublishAsync(default!);
             exception.ShouldNotBeNull();
             exception.ShouldBeOfType<RestaurantNotFoundException>();
         }

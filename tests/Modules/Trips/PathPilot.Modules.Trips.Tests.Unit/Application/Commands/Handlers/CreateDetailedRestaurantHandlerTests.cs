@@ -2,10 +2,12 @@
 using PathPilot.Modules.Trips.Application.Restaurants.Commands;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Shared;
+using PathPilot.Modules.Trips.Application.Restaurants.Events;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
+using PathPilot.Shared.Abstractions.Messaging;
 using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers;
@@ -13,12 +15,14 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers;
 public class CreateDetailedRestaurantHandlerTests
 {
     private readonly IRestaurantRepository _restaurantRepository;
+    private readonly IMessageBroker _messageBroker;
     private readonly ICommandHandler<CreateDetailedRestaurant> _commandHandler;
 
     public CreateDetailedRestaurantHandlerTests()
     {
         _restaurantRepository = Substitute.For<IRestaurantRepository>();
-        _commandHandler = new CreateDetailedRestaurantHandler(_restaurantRepository);
+        _messageBroker = Substitute.For<IMessageBroker>();
+        _commandHandler = new CreateDetailedRestaurantHandler(_restaurantRepository, _messageBroker);
         
     }
     
@@ -56,5 +60,13 @@ public class CreateDetailedRestaurantHandlerTests
                 r.MenuItems.Count() == menuItems.Count
         ));
         command.Id.ShouldNotBe(Guid.Empty);
+        await _messageBroker.Received(1).PublishAsync(Arg.Is<RestaurantAddressCreated>(message =>
+            message.RestaurantId == command.Id &&
+            message.City == command.City &&
+            message.Street == command.Street &&
+            message.BuildingNumber == command.BuildingNumber &&
+            message.PostCode == command.PostCode &&
+            message.Country == command.Country
+        ));
     }
 }

@@ -1,12 +1,15 @@
-﻿using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
+﻿using PathPilot.Modules.Trips.Application.Restaurants.Events;
+using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
+using PathPilot.Shared.Abstractions.Messaging;
 
 namespace PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
 
 internal sealed class UpdateAddressHandler(
-    IRestaurantRepository restaurantRepository
+    IRestaurantRepository restaurantRepository,
+    IMessageBroker messageBroker
     ) : ICommandHandler<UpdateAddress>
 {
     public async Task HandleAsync(UpdateAddress command)
@@ -19,6 +22,12 @@ internal sealed class UpdateAddressHandler(
         
         restaurant.UpdateAddress(address);
         await restaurantRepository.UpdateAsync(restaurant);
-        // TODO: dispatch address event
+        
+        await messageBroker.PublishAsync(new RestaurantAddressCreated(restaurant.Id,
+            restaurant.Address.City,
+            restaurant.Address.Street,
+            restaurant.Address.BuildingNumber,
+            restaurant.Address.PostCode,
+            restaurant.Address.Country));
     }
 }
