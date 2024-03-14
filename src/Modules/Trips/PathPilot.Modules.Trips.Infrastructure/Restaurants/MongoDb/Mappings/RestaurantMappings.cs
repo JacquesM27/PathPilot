@@ -6,7 +6,7 @@ namespace PathPilot.Modules.Trips.Infrastructure.Restaurants.MongoDb.Mappings;
 
 internal static class RestaurantMappings
 {
-    internal static RestaurantDocument ToDocuments(this Restaurant restaurant)
+    internal static RestaurantDocument ToDocument(this Restaurant restaurant)
         => new()
         {
             Id = restaurant.Id,
@@ -16,11 +16,11 @@ internal static class RestaurantMappings
             AverageRate = restaurant.AverageRate,
             CuisineType = restaurant.CuisineType,
             Address = restaurant.Address.ToDocument(),
-            MenuItems = restaurant.MenuItems.ToDocuments().ToList()
+            MenuItems = restaurant.MenuItems.ToDocument().ToList()
         };
     
 
-    private static IEnumerable<MenuItemDocument> ToDocuments(this IEnumerable<MenuItem> menuItems)
+    private static IEnumerable<MenuItemDocument> ToDocument(this IEnumerable<MenuItem> menuItems)
     {
         var menuItemDocuments = menuItems is null ? [] : menuItems.ToArray();
         

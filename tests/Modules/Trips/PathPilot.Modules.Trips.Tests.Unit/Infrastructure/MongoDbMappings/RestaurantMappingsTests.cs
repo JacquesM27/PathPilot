@@ -30,7 +30,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Infrastructure.MongoDbMappings
                 });
 
             // Act
-            var document = restaurant.ToDocuments();
+            var document = restaurant.ToDocument();
 
             // Assert
             document.Id.ShouldBe(restaurantId);
@@ -63,7 +63,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Infrastructure.MongoDbMappings
                 "Italian");
 
             // Act
-            var document = restaurant.ToDocuments();
+            var document = restaurant.ToDocument();
 
             // Assert
             document.Address.ShouldBeNull();
