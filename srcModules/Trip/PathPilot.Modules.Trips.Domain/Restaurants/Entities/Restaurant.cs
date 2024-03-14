@@ -17,7 +17,7 @@ public sealed class Restaurant
     public IEnumerable<MenuItem> MenuItems => _menuItems;
     private readonly HashSet<MenuItem> _menuItems = [];
 
-    private Restaurant(EntityId id, RestaurantName name, RestaurantDescription description, 
+    public Restaurant(EntityId id, RestaurantName name, RestaurantDescription description, 
         bool isOpened, double averageRate, CuisineType cuisineType, Address? address = null, IEnumerable<MenuItem>? menuItems = null)
     {
         Id = id;
