@@ -28,7 +28,7 @@ internal class RestaurantsController(
     public async Task<ActionResult> AddAsync(CreateRestaurant command)
     {
         await commandDispatcher.SendAsync(command);
-        return CreatedAtAction(nameof(Get), command.Id);
+        return CreatedAtAction(nameof(Get), new { id = command.Id }, null);
     }
     
     [HttpPost("detailed")]
@@ -36,10 +36,10 @@ internal class RestaurantsController(
     public async Task<ActionResult> AddAsync(CreateDetailedRestaurant command)
     {
         await commandDispatcher.SendAsync(command);
-        return CreatedAtAction(nameof(Get), command.Id);
+        return CreatedAtAction(nameof(Get), new { id = command.Id }, null);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("close/{id:guid}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     public async Task<ActionResult> CloseAsync(Guid id)
@@ -49,7 +49,7 @@ internal class RestaurantsController(
         return NoContent();
     }
     
-    [HttpPut("{id}")]
+    [HttpPut("open/{id:guid}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     public async Task<ActionResult> OpenAsync(Guid id)
@@ -58,7 +58,7 @@ internal class RestaurantsController(
         return NoContent();
     }
 
-    [HttpPut]
+    [HttpPut("new-address")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     public async Task<ActionResult> UpdateAddressAsync(UpdateAddress command)
@@ -67,7 +67,7 @@ internal class RestaurantsController(
         return NoContent();
     }
 
-    [HttpPut]
+    [HttpPut("new-menu")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
     public async Task<ActionResult> UpdateMenuAsync(UpdateMenu command)

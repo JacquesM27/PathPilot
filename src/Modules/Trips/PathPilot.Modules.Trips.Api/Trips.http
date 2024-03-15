@@ -1,18 +1,87 @@
 @Url = http://localhost:5196/trips-module
 
-GET {{Url}}
-Accept: application/json
-
 ###
+# @name create_restaurant
 POST {{Url}}/restaurants
 Content-Type: application/json
 
 {
-  "Name": "Pasta Italiano",
-  "Description": "Description of the restaurant",
-  "CuisineType": "Italian"
+  "name": "Pasta Italiano",
+  "description": "Description of the restaurant",
+  "cuisineType": "Italian"
 }
+
+###
+#@RestaurantId = {{create_restaurant.response.headers.Resource-ID}}
+@RestaurantId = 0fc1d79b-4eef-4f03-ab09-d035180b4796
 
 ###
 GET {{Url}}/restaurants
 Accept: application/json
+
+###
+GET {{Url}}/restaurants/{{RestaurantId}}
+Accept: application/json
+
+###
+POST {{Url}}/restaurants/detailed
+Content-Type: application/json
+
+{
+  "name": "Pasta Italiano",
+  "description": "Description of the restaurant",
+  "cuisineType": "Italian",
+  "city": "City",
+  "street": "Street",
+  "buildingNumber": "123",
+  "postCode": "12345",
+  "country": "Country",
+  "items": [
+    {
+      "name": "burger",
+      "description": "delicious burger",
+      "price": 21.37
+    },
+    {
+      "name": "pizza"
+    }
+  ]
+}
+
+###
+PUT {{Url}}/restaurants/close/{{RestaurantId}}
+
+###
+PUT {{Url}}/restaurants/open/{{RestaurantId}}
+
+###
+PUT {{Url}}/restaurants/new-address
+Content-Type: application/json
+
+{
+  "restaurantId": "{{RestaurantId}}",
+  "city": "Another city",
+  "street": "Street2",
+  "buildingNumber": "1123",
+  "postCode": "00000",
+  "country": "not a country"
+}
+
+###
+PUT {{Url}}/restaurants/new-menu
+Content-Type: application/json
+
+{
+  "restaurantId": "{{RestaurantId}}",
+  "items": [
+    {
+      "name": "burger",
+      "description": "delicious burger",
+      "price": 99.99
+    },
+    {
+      "name": "pizza",
+      "price": 90
+    }
+  ]
+}
