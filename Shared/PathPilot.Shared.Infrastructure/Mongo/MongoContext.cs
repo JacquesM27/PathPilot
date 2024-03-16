@@ -19,6 +19,6 @@ public abstract class MongoContext
     protected IMongoCollection<T> GetCollection<T>(string collectionName)
         => _mongoDatabase.GetCollection<T>(collectionName);
 
-    protected void DropDatabase()
+    public void DropDatabase()
         => _mongoClient.DropDatabase(_mongoOptions.DatabaseName);
 }

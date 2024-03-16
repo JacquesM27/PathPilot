@@ -12,7 +12,6 @@ public static class Extensions
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
-
         var options = services.GetOptions<MongoOptions>(MongoOptions.SectionName);
 
         var mongoClient = new MongoClient(options.ConnectionString);

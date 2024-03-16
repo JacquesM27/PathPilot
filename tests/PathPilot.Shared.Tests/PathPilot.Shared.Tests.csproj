@@ -12,12 +12,12 @@
     
     <ItemGroup>
       <ProjectReference Include="..\..\src\Bootstrapper\PathPilot.Bootstrapper\PathPilot.Bootstrapper.csproj" />
-      <ProjectReference Include="..\..\src\Modules\Trips\PathPilot.Modules.Trips.Infrastructure\PathPilot.Modules.Trips.Infrastructure.csproj" />
     </ItemGroup>
     
     <ItemGroup>
       <PackageReference Include="EphemeralMongo.Core" Version="1.1.3" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.3" />
+      <PackageReference Include="Shouldly" Version="4.2.1" />
       <PackageReference Include="xunit" Version="2.7.0" />
     </ItemGroup>
 
