@@ -6,10 +6,9 @@ using PathPilot.Shared.Abstractions.Kernel.Types;
 
 namespace PathPilot.Modules.Trips.Infrastructure.Restaurants.MongoDb.Repositories;
 
-internal sealed class RestaurantRepository(IMongoDatabase database) : IRestaurantRepository
+internal sealed class RestaurantRepository(RestaurantsMongoContext context) : IRestaurantRepository
 {
-    private readonly IMongoCollection<RestaurantDocument> _collection = 
-        database.GetCollection<RestaurantDocument>(RestaurantConfiguration.CollectionName);
+    private readonly IMongoCollection<RestaurantDocument> _collection = context.Restaurants;
     private readonly FilterDefinitionBuilder<RestaurantDocument> _filterBuilder = 
         Builders<RestaurantDocument>.Filter;
 

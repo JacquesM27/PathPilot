@@ -10,25 +10,11 @@ namespace PathPilot.Modules.Trips.Infrastructure.Restaurants.MongoDb.Mappings;
 
 internal static class RestaurantConfiguration
 {
-    internal const string CollectionName = "Restaurants";
 
     internal static IServiceCollection AddRestaurantRepository(this IServiceCollection services)
     {
-        // ConfigureEntity();
-        services.AddSingleton<IRestaurantRepository>(sp =>
-        {
-            var database = sp.GetService<IMongoDatabase>();
-            return new RestaurantRepository(database!);
-        });
+        services.AddMongoContext<RestaurantsMongoContext>();
+        services.AddScoped<IRestaurantRepository, RestaurantRepository>();
         return services;
     }
-    
-    // private static void ConfigureEntity()
-    // {
-    //     BsonClassMap.RegisterClassMap<Restaurant>(cm =>
-    //     {
-    //         cm.AutoMap();
-    //         cm.MapIdMember(c => c.Id).SetIdGenerator(EntityIdObjectIdGenerator.Instance);
-    //     });
-    // }
 }

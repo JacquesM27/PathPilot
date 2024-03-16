@@ -8,7 +8,9 @@ builder.Host.ConfigureModules();
 var assemblies = ModuleLoader.LoadAssemblies(builder.Configuration);
 var modules = ModuleLoader.LoadModules(assemblies);
 
-builder.Services.AddInfrastructure(assemblies, modules);
+builder.Services.AddInfrastructure(assemblies, modules, builder.Configuration);
+
+
 
 foreach (var module in modules)
 {

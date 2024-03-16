@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PathPilot.Shared.Infrastructure.Mongo;
 
 namespace PathPilot.Shared.Infrastructure.Options;
 
-internal static class Extensions
+public static class Extensions
 {
-    internal static T GetOptions<T>(this IServiceCollection services, string sectionName)
-        where T : new()
+    public static T GetOptions<T>(this IServiceCollection services, string sectionName)
+        where T : class, new()
     {
         using var serviceProvider = services.BuildServiceProvider();
         var configuration = serviceProvider.GetRequiredService<IConfiguration>();
@@ -14,10 +15,17 @@ internal static class Extensions
     }
 
     internal static T GetOptions<T>(this IConfiguration configuration, string sectionName)
-        where T : new()
+        where T : class, new()
     {
         var options = new T();
         configuration.GetSection(sectionName).Bind(options);
         return options;
+    }
+
+    internal static IServiceCollection BindOptions<T>(this IServiceCollection services, IConfiguration configuration, string sectionName)
+        where T : class
+    {
+        services.Configure<T>(configuration.GetSection(sectionName));
+        return services;
     }
 }

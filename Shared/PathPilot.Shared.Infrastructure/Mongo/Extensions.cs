@@ -5,22 +5,26 @@ using PathPilot.Shared.Infrastructure.Options;
 
 namespace PathPilot.Shared.Infrastructure.Mongo;
 
-internal static class Extensions
+public static class Extensions
 {
-    internal static IServiceCollection AddMongo(this IServiceCollection services)
+    internal static IServiceCollection AddMongoClient(this IServiceCollection services)
     {
         var camelCaseConvention = new ConventionPack { new CamelCaseElementNameConvention() };
         ConventionRegistry.Register("CamelCase", camelCaseConvention, type => true);
 
 
-        var options = services.GetOptions<MongoOptions>("MongoDB");
+        var options = services.GetOptions<MongoOptions>(MongoOptions.SectionName);
 
-        services.AddSingleton(sp =>
-        {
-            var mongoClient = new MongoClient(options.ConnectionString);
-            return mongoClient.GetDatabase(options.DatabaseName);
-        });
+        var mongoClient = new MongoClient(options.ConnectionString);
+        services.AddSingleton<IMongoClient, MongoClient>(_ => mongoClient);
 
+        return services;
+    }
+    
+    public static IServiceCollection AddMongoContext<T>(this IServiceCollection services)
+        where T : MongoContext
+    {
+        services.AddScoped<T>();
         return services;
     }
 }
