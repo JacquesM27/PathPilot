@@ -31,8 +31,8 @@ internal static class RestaurantMappings
     }
 
 
-    internal static Restaurant FromDocument(this RestaurantDocument document)
-        => new(
+    internal static Restaurant? FromDocument(this RestaurantDocument? document)
+        => document is null ? null : new Restaurant(
             document.Id,
             document.Name,
             document.Description,

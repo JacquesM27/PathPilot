@@ -15,17 +15,17 @@ internal sealed class RestaurantRepository(RestaurantsMongoContext context) : IR
     public async Task<IEnumerable<Restaurant>> BrowseAsync() //TODO: add pagination 
     {
         var documents = await _collection.Find(_filterBuilder.Empty).ToListAsync();
-        return documents.Select(x => x.FromDocument());
+        return documents.Select(x => x.FromDocument()!);
     }
 
     public async Task<IEnumerable<Restaurant>> BrowseAsync(IEnumerable<EntityId> ids)
     {
         var filter = _filterBuilder.In(r => r.Id, ids.Select(x => x.Value));
         var documents = await _collection.Find(filter).ToListAsync();
-        return documents.Select(x => x.FromDocument());
+        return documents.Where(x => x is not null).Select(x => x.FromDocument()!);
     }
 
-    public async Task<Restaurant> GetAsync(EntityId id)
+    public async Task<Restaurant?> GetAsync(EntityId id)
     {
         var filter = _filterBuilder.Eq(r => r.Id, id.Value);
         var document = await _collection.Find(filter).FirstOrDefaultAsync();

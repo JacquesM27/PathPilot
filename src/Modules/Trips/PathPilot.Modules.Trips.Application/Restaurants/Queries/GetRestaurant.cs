@@ -3,4 +3,4 @@ using PathPilot.Shared.Abstractions.Queries;
 
 namespace PathPilot.Modules.Trips.Application.Restaurants.Queries;
 
-public sealed record GetRestaurant(Guid Id) : IQuery<RestaurantDetailsDto>;
+public sealed record GetRestaurant(Guid Id) : IQuery<RestaurantDetailsDto?>;

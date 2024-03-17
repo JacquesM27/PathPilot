@@ -35,11 +35,10 @@ public class GetRestaurantHandlerTests
         var query = new GetRestaurant(id);
         
         // Act
-        var exception = await Record.ExceptionAsync(() => Act(query));
+        var result = await Act(query);
 
         // Assert        
-        exception.ShouldNotBeNull();
-        exception.ShouldBeOfType<RestaurantNotFoundException>();
+        result.ShouldBeNull();
         await _restaurantRepository.Received(1).GetAsync(id);
     }
 

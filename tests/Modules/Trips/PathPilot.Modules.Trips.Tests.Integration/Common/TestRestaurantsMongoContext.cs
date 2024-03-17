@@ -7,18 +7,26 @@ namespace PathPilot.Modules.Trips.Tests.Integration.Common;
 
 public class TestRestaurantsMongoContext : IDisposable
 {
-    public RestaurantsMongoContext Context { get; }
+    public readonly RestaurantsMongoContext Context;
+    private readonly MongoOptions _options;
+    private readonly MongoClient _client;
 
     public TestRestaurantsMongoContext()
     {
-        var options = OptionsHelper.GetOptions<MongoOptions>(MongoOptions.SectionName);
-        var mongoClient = new MongoClient(options.ConnectionString);
-        var restaurantContext = new RestaurantsMongoContext(mongoClient, new TestMongoOptions(options));
-        Context =  restaurantContext;
+        _options = OptionsHelper.GetOptions<MongoOptions>(MongoOptions.SectionName);
+        _client = new MongoClient(_options.ConnectionString);
+        var restaurantContext = new RestaurantsMongoContext(_client, new TestMongoOptions(_options));
+        Context = restaurantContext;
     }
 
     public void Dispose()
     {
-        Context.DropDatabase();
+        DropDatabase();
+        GC.SuppressFinalize(this);
+    }
+
+    private void DropDatabase()
+    {
+        _client.DropDatabase(_options.DatabaseName);
     }
 }

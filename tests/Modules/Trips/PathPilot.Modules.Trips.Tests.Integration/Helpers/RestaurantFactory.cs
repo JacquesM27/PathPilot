@@ -36,4 +36,22 @@ public static class RestaurantFactory
 
         return [restaurant1, restaurant2];
     }
+
+    public static Restaurant CreateRestaurant()
+    {
+        var restaurant = Restaurant.CreateDetailed(
+            name: "Restaurant 3",
+            description: "Description for Restaurant 3",
+            cuisineType: "Cuisine Type 3",
+            address: new Address("City 3", "Main St 1", "123", "12345", "Country 1"),
+            menuItems: new List<MenuItem>
+            {
+                new MenuItem("Item 1", "Description 1", 10.99),
+                new MenuItem("Item 2", "Description 2", 8.99),
+                new MenuItem("Item 3", "Description 3", 12.49)
+            }
+        );
+
+        return restaurant;
+    }
 }
