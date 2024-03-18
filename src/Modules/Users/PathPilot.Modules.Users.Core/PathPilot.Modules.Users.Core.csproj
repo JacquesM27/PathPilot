@@ -11,9 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DAL\" />
+      <Folder Include="DAL\Repositories\" />
       <Folder Include="DTO\" />
-      <Folder Include="Repositories\" />
       <Folder Include="Services\" />
     </ItemGroup>
 

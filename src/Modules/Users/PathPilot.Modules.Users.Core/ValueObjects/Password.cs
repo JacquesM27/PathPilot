@@ -8,6 +8,7 @@ public sealed record Password
 
     public Password(string value)
     {
+        //TODO: move this to "service"
         if (!HasPasswordValidPolicy(value))
             throw new InvalidPasswordException();
         
