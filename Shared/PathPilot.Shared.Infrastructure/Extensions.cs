@@ -12,7 +12,6 @@ using PathPilot.Shared.Infrastructure.Exceptions;
 using PathPilot.Shared.Infrastructure.Messaging;
 using PathPilot.Shared.Infrastructure.Modules;
 using PathPilot.Shared.Infrastructure.Mongo;
-using PathPilot.Shared.Infrastructure.Options;
 using PathPilot.Shared.Infrastructure.Queries;
 using PathPilot.Shared.Infrastructure.Storage;
 
@@ -24,7 +23,8 @@ internal static class Extensions
     internal static IServiceCollection AddInfrastructure(this IServiceCollection services,
         IList<Assembly> assemblies, IList<IModule> modules, IConfiguration configuration)
     {
-        services.BindOptions<MongoOptions>(configuration, MongoOptions.SectionName);
+        services.Configure<MongoOptions>(configuration.GetSection(MongoOptions.SectionName));
+        // services.BindOptions<MongoOptions>(configuration, MongoOptions.SectionName);
         
         services.AddMemoryCache();
         services.AddSingleton<IRequestStorage, RequestStorage>();
