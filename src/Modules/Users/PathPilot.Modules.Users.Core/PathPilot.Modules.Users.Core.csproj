@@ -10,4 +10,11 @@
       <ProjectReference Include="..\..\..\..\Shared\PathPilot.Shared.Infrastructure\PathPilot.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DAL\" />
+      <Folder Include="DTO\" />
+      <Folder Include="Repositories\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
 </Project>
