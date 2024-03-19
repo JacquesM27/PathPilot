@@ -7,18 +7,24 @@ using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Domain.Entities;
 
-public class Restaurant_Tests
+public class RestaurantTests
 {
+    private readonly Restaurant _restaurant;
+
+    // Setup
+    public RestaurantTests()
+    {
+        _restaurant = RestaurantHelper.GetRestaurant();
+    }
+    
     [Fact]
-    public void given_parameters_with_invalid_name_should_fail()
+    public void GivenParametersWithInvalidName_ShouldFail()
     {
         // Arrange
         const string id = "1234";
         var name = string.Empty;
         const string description = "Description of the restaurant";
         var cuisine = CuisineType.Italian;
-        IEnumerable<MenuItem> menuItems = [];
-        var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland", 0, 0);
 
         // Act
         var exception = Record.Exception(() => Restaurant.Create(name, description, cuisine));
@@ -29,7 +35,7 @@ public class Restaurant_Tests
     }
     
     [Fact]
-    public void given_parameters_with_valid_parameters_should_pass()
+    public void GivenParametersWithValidParameters_ShouldPass()
     {
         // Arrange
         const string name = "Pasta Italiano";
@@ -49,7 +55,7 @@ public class Restaurant_Tests
     }
 
     [Fact]
-    public void given_menu_item_with_invalid_name_should_fail()
+    public void GivenMenuItemWithInvalidName_ShouldFail()
     {
         // Arrange
         var name = string.Empty;
@@ -63,7 +69,7 @@ public class Restaurant_Tests
     }
 
     [Fact]
-    public void given_menu_item_with_valid_name_should_pass()
+    public void GivenMenuItemWithValidName_ShouldPass()
     {
         // Arrange
         const string name = "Lasagne";
@@ -78,7 +84,7 @@ public class Restaurant_Tests
     }
 
     [Fact]
-    public void given_menu_item_with_optional_parameters_should_has_values()
+    public void GivenMenuItemWithOptionalParameters_ShouldHaveValues()
     {
         // Arrange
         const string name = "Lasagne";
@@ -95,7 +101,7 @@ public class Restaurant_Tests
     }
 
     [Fact]
-    public void given_restaurant_should_add_menu_items_to_restaurant_collection()
+    public void GivenRestaurant_ShouldAddMenuItemsToRestaurantCollection()
     {
         // Arrange
         MenuItem[] menuItems =
@@ -114,7 +120,7 @@ public class Restaurant_Tests
     }
 
     [Fact]
-    public void given_restaurant_should_update_address_properly()
+    public void GivenRestaurant_ShouldUpdateAddressProperly()
     {
         // Arrange
         var address = new Address("Warsaw", "Złota", "1", "00-000", "Poland");
@@ -125,14 +131,5 @@ public class Restaurant_Tests
         // Assert
         _restaurant.Address.ShouldNotBeNull();
         _restaurant.Address.ShouldBe(address);
-    }
-
-
-    private readonly Restaurant _restaurant;
-
-    // Setup
-    public Restaurant_Tests()
-    {
-        _restaurant = RestaurantHelper.GetRestaurant();
     }
 }

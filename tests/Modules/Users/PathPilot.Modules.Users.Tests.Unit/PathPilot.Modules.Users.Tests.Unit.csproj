@@ -8,6 +8,7 @@
 
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\..\src\Modules\Users\PathPilot.Modules.Users.Core\PathPilot.Modules.Users.Core.csproj" />
         <ProjectReference Include="..\..\..\PathPilot.Shared.Tests\PathPilot.Shared.Tests.csproj" />
     </ItemGroup>
 

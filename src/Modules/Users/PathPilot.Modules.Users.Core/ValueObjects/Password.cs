@@ -4,13 +4,13 @@ namespace PathPilot.Modules.Users.Core.ValueObjects;
 
 public sealed record Password
 {
-    public string Value { get; private set; }
+    public string Value { get; }
 
-    public Password(string value)
+    private Password(string value)
     {
         //TODO: move this to "service"
-        if (!HasPasswordValidPolicy(value))
-            throw new InvalidPasswordException();
+        // if (!HasPasswordValidPolicy(value))
+        //     throw new InvalidPasswordException();
         
         Value = value;
     }

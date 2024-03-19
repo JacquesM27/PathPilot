@@ -16,4 +16,8 @@
       <Folder Include="Services\" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="PathPilot.Modules.Users.Tests.Unit"/>
+    </ItemGroup>
+
 </Project>

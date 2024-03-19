@@ -1,4 +1,5 @@
 ﻿using PathPilot.Modules.Users.Core.Entities;
+using PathPilot.Modules.Users.Core.ValueObjects;
 
 namespace PathPilot.Modules.Users.Core.DAL.Mappings;
 
@@ -8,6 +9,8 @@ internal static class UserMapping
         => new()
         {
             Id = user.Id,
+            FirstName = user.Name.FirstName,
+            LastName = user.Name.LastName,
             Email = user.Email,
             Password = user.Password,
             Role = user.Role,
@@ -17,6 +20,7 @@ internal static class UserMapping
 
     internal static User FromDocument(this UserDocument user)
         => new(user.Id,
+            new Name(user.FirstName, user.LastName),
             user.Email,
             user.Password,
             user.Role,
