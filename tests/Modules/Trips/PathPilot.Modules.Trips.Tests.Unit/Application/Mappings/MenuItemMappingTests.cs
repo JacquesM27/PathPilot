@@ -1,7 +1,6 @@
 ﻿using PathPilot.Modules.Trips.Application.Restaurants.Commands.Shared;
 using PathPilot.Modules.Trips.Application.Restaurants.Mapping;
 using PathPilot.Modules.Trips.Domain.Restaurants.Exceptions;
-using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Application.Mappings;
 

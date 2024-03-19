@@ -1,6 +1,5 @@
 ﻿using PathPilot.Modules.Trips.Application.Restaurants.DTO;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
-using Shouldly;
 
 namespace PathPilot.Modules.Trips.Tests.Integration.Helpers;
 
@@ -15,7 +14,20 @@ internal static class RestaurantAssertions
         actualRestaurant.IsOpened.ShouldBe(expectedRestaurant.IsOpened);
         actualRestaurant.AverageRate.ShouldBe(expectedRestaurant.AverageRate);
         actualRestaurant.CuisineType.ShouldBe(expectedRestaurant.CuisineType);
-        //add items and address?
+        
+        actualRestaurant.Address.ShouldBe(new AddressDto(
+            expectedRestaurant.Address.City,
+            expectedRestaurant.Address.Street,
+            expectedRestaurant.Address.BuildingNumber,
+            expectedRestaurant.Address.PostCode,
+            expectedRestaurant.Address.Country,
+            expectedRestaurant.Address.Longitude,
+            expectedRestaurant.Address.Latitude
+        ));
+
+        actualRestaurant.MenuItems.ShouldBe(expectedRestaurant.MenuItems.Select(item =>
+            new MenuItemDto(item.Name, item.Description, item.Price)
+        ));
     }
     
     internal static void AssertRestaurantDtoMatchesRestaurant(this Restaurant expectedRestaurant, RestaurantDto actualRestaurant)

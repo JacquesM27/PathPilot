@@ -2,7 +2,6 @@
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Modules.Trips.Domain.ValueObjects;
-using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Application.Mappings;
 

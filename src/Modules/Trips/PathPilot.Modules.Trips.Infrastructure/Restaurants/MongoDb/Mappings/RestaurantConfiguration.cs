@@ -1,7 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver;
-using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Infrastructure.Restaurants.MongoDb.Repositories;
 using PathPilot.Shared.Infrastructure.Mongo;

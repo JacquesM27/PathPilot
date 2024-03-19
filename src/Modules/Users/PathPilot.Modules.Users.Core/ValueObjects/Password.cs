@@ -1,6 +1,4 @@
-﻿using PathPilot.Modules.Users.Core.Exceptions;
-
-namespace PathPilot.Modules.Users.Core.ValueObjects;
+﻿namespace PathPilot.Modules.Users.Core.ValueObjects;
 
 public sealed record Password
 {

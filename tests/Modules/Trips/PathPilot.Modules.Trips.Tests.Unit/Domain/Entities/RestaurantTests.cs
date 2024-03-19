@@ -3,7 +3,6 @@ using PathPilot.Modules.Trips.Domain.Restaurants.Exceptions;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Modules.Trips.Domain.ValueObjects;
-using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Domain.Entities;
 

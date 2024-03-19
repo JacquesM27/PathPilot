@@ -15,15 +15,16 @@ public class AddressMappingTests
         var document = address.ToDocument();
 
         // Assert
-        Assert.Equal(address.City, document.City);
-        Assert.Equal(address.Street, document.Street);
-        Assert.Equal(address.BuildingNumber, document.BuildingNumber);
-        Assert.Equal(address.PostCode, document.PostCode);
-        Assert.Equal(address.Country, document.Country);
-        Assert.NotNull(document.Location);
-        Assert.Equal("Point", document.Location.Type);
-        Assert.Equal(1.234567m, document.Location.Coordinates[0]);
-        Assert.Equal(5.678912m, document.Location.Coordinates[1]);
+        document.ShouldNotBeNull();
+        document.City.ShouldBe(address.City);
+        document.Street.ShouldBe(address.Street);
+        document.BuildingNumber.ShouldBe(address.BuildingNumber);
+        document.PostCode.ShouldBe(address.PostCode);
+        document.Country.ShouldBe(address.Country);
+        document.Location.ShouldNotBeNull();
+        document.Location.Type.ShouldBe("Point");
+        document.Location.Coordinates[0].ShouldBe(1.234567m);
+        document.Location.Coordinates[1].ShouldBe(5.678912m);
     }
 
     [Fact]
@@ -36,12 +37,13 @@ public class AddressMappingTests
         var document = address.ToDocument();
 
         // Assert
-        Assert.Equal(address.City, document.City);
-        Assert.Equal(address.Street, document.Street);
-        Assert.Equal(address.BuildingNumber, document.BuildingNumber);
-        Assert.Equal(address.PostCode, document.PostCode);
-        Assert.Equal(address.Country, document.Country);
-        Assert.Null(document.Location);
+        document.ShouldNotBeNull();
+        document.City.ShouldBe(address.City);
+        document.Street.ShouldBe(address.Street);
+        document.BuildingNumber.ShouldBe(address.BuildingNumber);
+        document.PostCode.ShouldBe(address.PostCode);
+        document.Country.ShouldBe(address.Country);
+        document.Location.ShouldBeNull();
     }
 
     [Fact]
@@ -65,15 +67,14 @@ public class AddressMappingTests
         var address = document.FromDocument();
 
         // Assert
-        Assert.Equal(document.City, address.City);
-        Assert.Equal(document.Street, address.Street);
-        Assert.Equal(document.BuildingNumber, address.BuildingNumber);
-        Assert.Equal(document.PostCode, address.PostCode);
-        Assert.Equal(document.Country, address.Country);
-        Assert.NotNull(address.Longitude);
-        Assert.NotNull(address.Latitude);
-        Assert.Equal(1.234567m, address.Longitude);
-        Assert.Equal(5.678912m, address.Latitude);
+        address.ShouldNotBeNull();
+        address.City.ShouldBe(document.City);
+        address.Street.ShouldBe(document.Street);
+        address.BuildingNumber.ShouldBe(document.BuildingNumber);
+        address.PostCode.ShouldBe(document.PostCode);
+        address.Country.ShouldBe(document.Country);
+        address.Longitude.ShouldBe(1.234567m);
+        address.Latitude.ShouldBe(5.678912m);
     }
 
     [Fact]
@@ -93,12 +94,13 @@ public class AddressMappingTests
         var address = document.FromDocument();
 
         // Assert
-        Assert.Equal(document.City, address.City);
-        Assert.Equal(document.Street, address.Street);
-        Assert.Equal(document.BuildingNumber, address.BuildingNumber);
-        Assert.Equal(document.PostCode, address.PostCode);
-        Assert.Equal(document.Country, address.Country);
-        Assert.Null(address.Longitude);
-        Assert.Null(address.Latitude);
+        address.ShouldNotBeNull();
+        address.City.ShouldBe(document.City);
+        address.Street.ShouldBe(document.Street);
+        address.BuildingNumber.ShouldBe(document.BuildingNumber);
+        address.PostCode.ShouldBe(document.PostCode);
+        address.Country.ShouldBe(document.Country);
+        address.Longitude.ShouldBeNull();
+        address.Latitude.ShouldBeNull();
     }
 }

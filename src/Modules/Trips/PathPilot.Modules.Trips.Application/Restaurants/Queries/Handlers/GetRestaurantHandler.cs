@@ -1,5 +1,4 @@
 ﻿using PathPilot.Modules.Trips.Application.Restaurants.DTO;
-using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
 using PathPilot.Modules.Trips.Application.Restaurants.Mapping;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Shared.Abstractions.Queries;

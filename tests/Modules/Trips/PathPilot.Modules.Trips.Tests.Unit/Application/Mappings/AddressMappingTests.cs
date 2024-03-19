@@ -1,6 +1,5 @@
 ﻿using PathPilot.Modules.Trips.Application.Shared.Mappings;
 using PathPilot.Modules.Trips.Domain.ValueObjects;
-using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Application.Mappings;
 

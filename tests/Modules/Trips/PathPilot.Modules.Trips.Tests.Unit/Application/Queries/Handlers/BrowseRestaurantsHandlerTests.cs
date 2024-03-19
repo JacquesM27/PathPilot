@@ -1,5 +1,4 @@
-﻿using NSubstitute;
-using PathPilot.Modules.Trips.Application.Restaurants.DTO;
+﻿using PathPilot.Modules.Trips.Application.Restaurants.DTO;
 using PathPilot.Modules.Trips.Application.Restaurants.Queries;
 using PathPilot.Modules.Trips.Application.Restaurants.Queries.Handlers;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
@@ -7,7 +6,6 @@ using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Tests.Helpers;
 using PathPilot.Shared.Abstractions.Kernel.Types;
 using PathPilot.Shared.Abstractions.Queries;
-using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Application.Queries.Handlers
 {

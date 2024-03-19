@@ -1,6 +1,5 @@
 ﻿using PathPilot.Modules.Users.Core.Entities;
 using PathPilot.Modules.Users.Core.Exceptions;
-using Shouldly;
 
 namespace PathPilot.Modules.Users.Tests.Unit.Core.Entities;
 

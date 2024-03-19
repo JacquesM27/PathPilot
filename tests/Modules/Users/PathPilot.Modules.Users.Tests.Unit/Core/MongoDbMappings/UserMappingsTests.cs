@@ -1,6 +1,5 @@
 ﻿using PathPilot.Modules.Users.Core.DAL.Mappings;
 using PathPilot.Modules.Users.Tests.Unit.Helpers;
-using Shouldly;
 
 namespace PathPilot.Modules.Users.Tests.Unit.Core.MongoDbMappings;
 

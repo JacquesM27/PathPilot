@@ -8,7 +8,6 @@ using PathPilot.Modules.Trips.Infrastructure.Restaurants.MongoDb.Repositories;
 using PathPilot.Modules.Trips.Tests.Integration.Common;
 using PathPilot.Modules.Trips.Tests.Integration.Helpers;
 using PathPilot.Shared.Tests;
-using Shouldly;
 
 namespace PathPilot.Modules.Trips.Tests.Integration.Controllers.Restaurant;
 

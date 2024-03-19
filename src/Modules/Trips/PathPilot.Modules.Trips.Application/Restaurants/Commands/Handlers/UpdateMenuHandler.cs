@@ -1,8 +1,6 @@
-﻿using PathPilot.Modules.Trips.Application.Restaurants.Commands.Shared;
-using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
+﻿using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
 using PathPilot.Modules.Trips.Application.Restaurants.Mapping;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
-using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
 
 namespace PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;

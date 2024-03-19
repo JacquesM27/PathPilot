@@ -1,11 +1,9 @@
-﻿using NSubstitute;
-using PathPilot.Modules.Trips.Application.Restaurants.Commands;
+﻿using PathPilot.Modules.Trips.Application.Restaurants.Commands;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Restaurants.ValueObjects;
 using PathPilot.Shared.Abstractions.Commands;
-using Shouldly;
 
 namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
 {

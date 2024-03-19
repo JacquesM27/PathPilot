@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PathPilot.Shared.Infrastructure.Mongo;
 
 namespace PathPilot.Shared.Infrastructure.Options;
 
