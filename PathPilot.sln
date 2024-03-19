@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{3040
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trips", "Trips", "{0C4185D1-F871-4A01-A58B-73BECB910082}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.Domain", "srcModules\Trip\PathPilot.Modules.Trips.Domain\PathPilot.Modules.Trips.Domain.csproj", "{E52D95D0-D6E5-4E83-A2F9-BB23A51E7F37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Trips.Domain", "src\Modules\Trips\PathPilot.Modules.Trips.Domain\PathPilot.Modules.Trips.Domain.csproj", "{E52D95D0-D6E5-4E83-A2F9-BB23A51E7F37}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{A19780F2-5B4B-48DA-B2E2-6053569AEE92}"
 EndProject

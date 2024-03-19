@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Shared\PathPilot.Shared.Abstractions\PathPilot.Shared.Abstractions.csproj" />
+      <ProjectReference Include="..\..\..\..\Shared\PathPilot.Shared.Abstractions\PathPilot.Shared.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
