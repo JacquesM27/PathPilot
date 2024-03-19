@@ -12,8 +12,6 @@
 
     <ItemGroup>
       <Folder Include="DAL\Repositories\" />
-      <Folder Include="DTO\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
     <ItemGroup>

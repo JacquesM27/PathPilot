@@ -25,7 +25,7 @@ internal static class Extensions
     {
         services.Configure<MongoOptions>(configuration.GetSection(MongoOptions.SectionName));
         // services.BindOptions<MongoOptions>(configuration, MongoOptions.SectionName);
-        
+
         services.AddMemoryCache();
         services.AddSingleton<IRequestStorage, RequestStorage>();
 
