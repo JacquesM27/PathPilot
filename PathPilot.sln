@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Users.Cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{6BCDF255-800B-4CE6-9E3D-9D29B876E9CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Users.Tests.Unit", "tests\Modules\PathPilot.Modules.Users.Tests.Unit\PathPilot.Modules.Users.Tests.Unit.csproj", "{846E739A-F2DF-4CA3-ADA8-57CBC0A04734}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Users.Tests.Unit", "tests\Modules\Users\PathPilot.Modules.Users.Tests.Unit\PathPilot.Modules.Users.Tests.Unit.csproj", "{E97B17EE-81E2-4F36-9E5D-B802092DFA83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,10 +97,10 @@ Global
 		{A3E174D3-40AC-48A9-A684-6C86BA8A326E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3E174D3-40AC-48A9-A684-6C86BA8A326E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3E174D3-40AC-48A9-A684-6C86BA8A326E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{846E739A-F2DF-4CA3-ADA8-57CBC0A04734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{846E739A-F2DF-4CA3-ADA8-57CBC0A04734}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{846E739A-F2DF-4CA3-ADA8-57CBC0A04734}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{846E739A-F2DF-4CA3-ADA8-57CBC0A04734}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E97B17EE-81E2-4F36-9E5D-B802092DFA83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E97B17EE-81E2-4F36-9E5D-B802092DFA83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E97B17EE-81E2-4F36-9E5D-B802092DFA83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E97B17EE-81E2-4F36-9E5D-B802092DFA83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +128,6 @@ Global
 		{DE542E54-AF1F-4C37-8715-1556EC4AA9E3} = {30404811-5AC1-413F-8EE5-A751E78963BF}
 		{A3E174D3-40AC-48A9-A684-6C86BA8A326E} = {DE542E54-AF1F-4C37-8715-1556EC4AA9E3}
 		{6BCDF255-800B-4CE6-9E3D-9D29B876E9CB} = {FC50D5ED-E184-4BD3-B50C-E6BB05C2DC8A}
-		{846E739A-F2DF-4CA3-ADA8-57CBC0A04734} = {6BCDF255-800B-4CE6-9E3D-9D29B876E9CB}
+		{E97B17EE-81E2-4F36-9E5D-B802092DFA83} = {6BCDF255-800B-4CE6-9E3D-9D29B876E9CB}
 	EndGlobalSection
 EndGlobal

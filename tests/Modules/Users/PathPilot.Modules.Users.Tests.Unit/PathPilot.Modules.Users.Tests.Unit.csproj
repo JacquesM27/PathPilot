@@ -8,12 +8,11 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+        <ProjectReference Include="..\..\..\PathPilot.Shared.Tests\PathPilot.Shared.Tests.csproj" />
     </ItemGroup>
 
-
     <ItemGroup>
-      <ProjectReference Include="..\..\PathPilot.Shared.Tests\PathPilot.Shared.Tests.csproj" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
     </ItemGroup>
     
 </Project>
