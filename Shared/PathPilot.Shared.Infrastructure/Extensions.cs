@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using PathPilot.Shared.Abstractions.Modules;
 using PathPilot.Shared.Abstractions.Storage;
 using PathPilot.Shared.Infrastructure.Api;
+using PathPilot.Shared.Infrastructure.Auth;
 using PathPilot.Shared.Infrastructure.Commands;
 using PathPilot.Shared.Infrastructure.Events;
 using PathPilot.Shared.Infrastructure.Exceptions;
@@ -23,6 +24,8 @@ internal static class Extensions
     internal static IServiceCollection AddInfrastructure(this IServiceCollection services,
         IList<Assembly> assemblies, IList<IModule> modules, IConfiguration configuration)
     {
+        services.AddSingleton(TimeProvider.System);
+        
         services.Configure<MongoOptions>(configuration.GetSection(MongoOptions.SectionName));
         // services.BindOptions<MongoOptions>(configuration, MongoOptions.SectionName);
 
@@ -32,6 +35,7 @@ internal static class Extensions
         services.AddModuleInfo(modules);
         services.AddModuleRequest(assemblies);
 
+        services.AddAuth(modules);
         services.AddErrorHandling();
         
         services.AddCommands(assemblies);
@@ -53,6 +57,19 @@ internal static class Extensions
     internal static WebApplication UseInfrastructure(this WebApplication app)
     {
         app.UseErrorHandling();
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        app.UseReDoc(options =>
+        {
+            options.RoutePrefix = "docs";
+            options.SpecUrl("/swagger/v1/swagger.json");
+            options.DocumentTitle = "PathPilot API";
+        });
+
+        app.UseHttpsRedirection();
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         return app;
     }
