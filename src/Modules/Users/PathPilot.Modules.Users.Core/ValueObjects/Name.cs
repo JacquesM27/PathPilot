@@ -18,4 +18,7 @@ public sealed record Name
         FirstName = firstName;
         LastName = lastName;
     }
+
+    public override string ToString()
+        => FirstName + " " + LastName;
 }

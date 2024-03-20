@@ -6,6 +6,7 @@ namespace PathPilot.Modules.Users.Core.Services;
 public interface IIdentityService
 {
     Task<AccountDto?> GetAsync(Guid id);
-    Task SignUpAsync(SignUpDto dto);
+    Task SignUpUserAsync(SignUpDto dto);
+    Task SignUpAdminAsync(SignUpDto dto);
     Task<JsonWebToken> SignInAsync(SignInDto dto);
 }
