@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Shared\PathPilot.Shared.Abstractions\PathPilot.Shared.Abstractions.csproj" />
       <ProjectReference Include="..\..\Modules\Trips\PathPilot.Modules.Trips.Api\PathPilot.Modules.Trips.Api.csproj" />
+      <ProjectReference Include="..\..\Modules\Users\PathPilot.Modules.Users.Api\PathPilot.Modules.Users.Api.csproj" />
     </ItemGroup>
 
 

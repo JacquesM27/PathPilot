@@ -18,8 +18,8 @@ internal static class UserMapping
             Claims = user.Claims
         };
 
-    internal static User FromDocument(this UserDocument user)
-        => new(user.Id,
+    internal static User? FromDocument(this UserDocument? user)
+        => user is null ? null : new User(user.Id,
             new Name(user.FirstName, user.LastName),
             user.Email,
             user.Password,

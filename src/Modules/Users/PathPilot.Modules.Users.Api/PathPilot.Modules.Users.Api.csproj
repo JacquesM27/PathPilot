@@ -7,11 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\Shared\PathPilot.Shared.Infrastructure\PathPilot.Shared.Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <InternalsVisibleTo Include="PathPilot.Modules.Users.Tests.Unit"/>
+      <ProjectReference Include="..\PathPilot.Modules.Users.Core\PathPilot.Modules.Users.Core.csproj" />
     </ItemGroup>
 
 </Project>
