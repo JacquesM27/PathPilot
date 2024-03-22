@@ -1,4 +1,6 @@
-﻿using PathPilot.Modules.Users.Core.Services;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PathPilot.Modules.Users.Core.Services;
 
 namespace PathPilot.Modules.Users.Api.Controllers;
 

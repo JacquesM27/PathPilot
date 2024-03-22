@@ -1,13 +1,16 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PathPilot.Shared.Abstractions.Contexts;
 using PathPilot.Shared.Abstractions.Modules;
 using PathPilot.Shared.Abstractions.Storage;
 using PathPilot.Shared.Infrastructure.Api;
 using PathPilot.Shared.Infrastructure.Auth;
 using PathPilot.Shared.Infrastructure.Commands;
+using PathPilot.Shared.Infrastructure.Contexts;
 using PathPilot.Shared.Infrastructure.Events;
 using PathPilot.Shared.Infrastructure.Exceptions;
 using PathPilot.Shared.Infrastructure.Messaging;
@@ -31,6 +34,10 @@ internal static class Extensions
 
         services.AddMemoryCache();
         services.AddSingleton<IRequestStorage, RequestStorage>();
+
+        services.AddSingleton<IContextFactory, ContextFactory>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddTransient<IContext>(sp => sp.GetRequiredService<IContextFactory>().Create());
 
         services.AddModuleInfo(modules);
         services.AddModuleRequest(assemblies);
