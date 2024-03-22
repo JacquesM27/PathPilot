@@ -1,0 +1,3 @@
+@Url = http://localhost:5196/users-module
+
+GET {{Url}}

@@ -12,10 +12,11 @@ internal class RestaurantsController(
     IQueryDispatcher queryDispatcher
     ) : BaseController
 {
+    // TODO: add policy 
     [HttpGet("{id:guid}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
-    public async Task<ActionResult<RestaurantDetailsDto>> Get(Guid id)
+    public async Task<ActionResult<RestaurantDetailsDto?>> Get(Guid id)
         => OkOrNotFound(await queryDispatcher.QueryAsync(new GetRestaurant(id)));
 
     [HttpGet]

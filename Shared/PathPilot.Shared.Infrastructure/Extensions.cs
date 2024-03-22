@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using PathPilot.Shared.Abstractions.Contexts;
 using PathPilot.Shared.Abstractions.Modules;
 using PathPilot.Shared.Abstractions.Storage;
@@ -32,6 +33,8 @@ internal static class Extensions
         services.Configure<MongoOptions>(configuration.GetSection(MongoOptions.SectionName));
         // services.BindOptions<MongoOptions>(configuration, MongoOptions.SectionName);
 
+        services.AddSwagger();
+        
         services.AddMemoryCache();
         services.AddSingleton<IRequestStorage, RequestStorage>();
 
@@ -79,5 +82,19 @@ internal static class Extensions
         app.UseAuthorization();
 
         return app;
+    }
+
+    private static IServiceCollection AddSwagger(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(swagger =>
+        {
+            swagger.CustomSchemaIds(x => x.FullName);
+            swagger.SwaggerDoc("v1", new OpenApiInfo()
+            {
+                Title = "PathPilot API",
+                Version = "v1"
+            });
+        });
+        return services;
     }
 }

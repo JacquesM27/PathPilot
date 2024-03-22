@@ -10,6 +10,9 @@ public sealed class UsersModule : IModule
     internal const string BasePath = "users-module";
     public string Name => "Users";
     public string Path => BasePath;
+
+    public IEnumerable<string>? Policies { get; } = ["users"];
+
     public void Register(IServiceCollection services)
     {
         services.AddCore();
