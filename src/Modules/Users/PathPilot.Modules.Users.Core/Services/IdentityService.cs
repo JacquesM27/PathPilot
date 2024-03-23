@@ -24,6 +24,7 @@ internal sealed class IdentityService(
 
     public async Task SignUpUserAsync(SignUpDto dto)
     {
+        ValidPassword(dto.Password);
         await ValidEmail(dto.Email);
 
         var password = passwordHasher.HashPassword(default, dto.Password);
@@ -33,21 +34,14 @@ internal sealed class IdentityService(
 
     public async Task SignUpAdminAsync(SignUpDto dto)
     {
+        ValidPassword(dto.Password);
         await ValidEmail(dto.Email);
 
         var password = passwordHasher.HashPassword(default, dto.Password);
         var user = User.CreateAdmin(dto.FirstName, dto.LastName, dto.Email, password, dto.Claims);
         await userRepository.AddAsync(user);
     }
-
-    private async Task ValidEmail(string email)
-    {
-        var user = await userRepository.GetAsync(email);
-
-        if (user is not null)
-            throw new EmailInUseException();
-    }
-
+    
     public async Task<JsonWebToken> SignInAsync(SignInDto dto)
     {
         var user = await userRepository.GetAsync(dto.Email.ToLowerInvariant())
@@ -65,5 +59,35 @@ internal sealed class IdentityService(
         jwt.FullName = user.Name.ToString();
 
         return jwt;
+    }
+
+    private async Task ValidEmail(string email)
+    {
+        var user = await userRepository.GetAsync(email);
+
+        if (user is not null)
+            throw new EmailInUseException();
+    }
+
+    private void ValidPassword(string password)
+    {
+         if (!HasPasswordValidPolicy(password))
+            throw new InvalidPasswordException();
+    }
+    
+    private static bool HasPasswordValidPolicy(string password)
+    {
+        if (password.Length < 6)
+            return false;
+
+        return password.Any(char.IsUpper) &&
+               password.Any(char.IsLower) &&
+               password.Any(char.IsDigit) &&
+               password.Any(IsSpecialCharacter);
+    }
+
+    private static bool IsSpecialCharacter(char c)
+    {
+        return "!@#$%^&*()_+-=[]{};':\"\\|,.<>?".Contains(c);
     }
 }

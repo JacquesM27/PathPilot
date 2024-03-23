@@ -1,3 +1,29 @@
 @Url = http://localhost:5196/users-module
+@userEmail = user1@confab.io
+@password = secret123$%^
+@role = user
+@firstName = John
+@lastName = Doe
+@accessToken = x
 
+
+###
 GET {{Url}}
+
+###
+POST {{Url}}/account/sign-up-user
+Content-Type: application/json
+
+{
+    "email": "{{userEmail}}",
+    "firstName": "{{firstName}}",
+    "lastName": "{{lastName}}",
+    "password": "{{password}}",
+    "claims": {
+        "permissions": ["restaurants"]
+    }
+}
+
+###
+GET {{Url}}/account
+Authorization: Bearer {{accessToken}}
