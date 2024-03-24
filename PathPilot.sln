@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Users.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Users.Api", "src\Modules\Users\PathPilot.Modules.Users.Api\PathPilot.Modules.Users.Api.csproj", "{174348BD-0D23-49F6-AAF4-B4140BE28DA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PathPilot.Modules.Users.Tests.Integration", "tests\Modules\Users\PathPilot.Modules.Users.Tests.Integration\PathPilot.Modules.Users.Tests.Integration.csproj", "{3D7E8857-0FCD-4831-B9CF-27661F55F06E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,10 @@ Global
 		{174348BD-0D23-49F6-AAF4-B4140BE28DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{174348BD-0D23-49F6-AAF4-B4140BE28DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{174348BD-0D23-49F6-AAF4-B4140BE28DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D7E8857-0FCD-4831-B9CF-27661F55F06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7E8857-0FCD-4831-B9CF-27661F55F06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7E8857-0FCD-4831-B9CF-27661F55F06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7E8857-0FCD-4831-B9CF-27661F55F06E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,5 +142,6 @@ Global
 		{6BCDF255-800B-4CE6-9E3D-9D29B876E9CB} = {FC50D5ED-E184-4BD3-B50C-E6BB05C2DC8A}
 		{E97B17EE-81E2-4F36-9E5D-B802092DFA83} = {6BCDF255-800B-4CE6-9E3D-9D29B876E9CB}
 		{174348BD-0D23-49F6-AAF4-B4140BE28DA7} = {DE542E54-AF1F-4C37-8715-1556EC4AA9E3}
+		{3D7E8857-0FCD-4831-B9CF-27661F55F06E} = {6BCDF255-800B-4CE6-9E3D-9D29B876E9CB}
 	EndGlobalSection
 EndGlobal
