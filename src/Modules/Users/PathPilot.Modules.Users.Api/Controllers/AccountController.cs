@@ -26,7 +26,7 @@ internal sealed class AccountController(
         return NoContent();
     }
 
-    [Authorize(Policy)]
+    //[Authorize(Policy)]
     [HttpPost("sign-up-admin")]
     public async Task<ActionResult> SignUpAdminAsync(SignUpDto dto)
     {

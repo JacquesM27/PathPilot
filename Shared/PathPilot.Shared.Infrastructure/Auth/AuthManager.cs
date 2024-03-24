@@ -33,7 +33,7 @@ public sealed class AuthManager : IAuthManager
         if (string.IsNullOrWhiteSpace(userId))
             throw new ArgumentException("User ID claim (subject) cannot be empty", nameof(userId));
 
-        var now = _timeProvider.GetUtcNow();
+        var now = _timeProvider.GetLocalNow();
         var jwtClaims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, userId),

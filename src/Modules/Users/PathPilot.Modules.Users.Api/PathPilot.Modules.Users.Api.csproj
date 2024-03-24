@@ -10,4 +10,15 @@
       <ProjectReference Include="..\PathPilot.Modules.Users.Core\PathPilot.Modules.Users.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="module.users.json" />
+      <Content Include="module.users.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="module.users.development.json" />
+      <Content Include="module.users.development.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
 </Project>

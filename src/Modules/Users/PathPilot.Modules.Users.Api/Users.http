@@ -1,10 +1,9 @@
 @Url = http://localhost:5196/users-module
 @userEmail = user1@confab.io
-@password = secret123$%^
-@role = user
+@adminEmail = admin1@confab.io
+@password = secreT123$%^
 @firstName = John
 @lastName = Doe
-@accessToken = x
 
 
 ###
@@ -25,5 +24,50 @@ Content-Type: application/json
 }
 
 ###
+# @name signin
+POST {{Url}}/account/sign-in
+Content-Type: application/json
+
+{
+    "email": "{{userEmail}}",
+    "password": "{{password}}"
+}
+
+###
+@accessToken = {{signin.response.body.$.accessToken}}
+
+###
 GET {{Url}}/account
 Authorization: Bearer {{accessToken}}
+
+###
+POST {{Url}}/account/sign-up-admin
+Content-Type: application/json
+
+{
+    "email": "{{adminEmail}}",
+    "firstName": "{{firstName}}",
+    "lastName": "{{lastName}}",
+    "password": "{{password}}",
+    "claims": {
+        "permissions": ["restaurants", "users"]
+    }
+}
+
+###
+# @name signinadmin
+POST {{Url}}/account/sign-in
+Content-Type: application/json
+
+{
+    "email": "{{adminEmail}}",
+    "password": "{{password}}"
+}
+
+
+###
+@accessTokenAdmin = {{signinadmin.response.body.$.accessToken}}
+
+###
+GET {{Url}}/account
+Authorization: Bearer {{accessTokenAdmin}}
