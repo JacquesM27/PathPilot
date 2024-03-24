@@ -1,6 +1,6 @@
 @Url = http://localhost:5196/users-module
 @userEmail = user1@confab.io
-@adminEmail = admin1@confab.io
+@adminEmail = admin2@confab.io
 @password = secreT123$%^
 @firstName = John
 @lastName = Doe

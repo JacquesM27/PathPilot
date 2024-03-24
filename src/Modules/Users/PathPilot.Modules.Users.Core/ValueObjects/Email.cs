@@ -13,7 +13,7 @@ public sealed record Email
 
     private Email(string value)
     {
-        if (!Regex.IsMatch(value))
+        if (string.IsNullOrWhiteSpace(value) || !Regex.IsMatch(value))
             throw new InvalidEmailAddressException(value);
         
         Value = value;

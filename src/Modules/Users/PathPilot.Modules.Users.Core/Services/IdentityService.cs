@@ -1,5 +1,4 @@
-﻿using System.Security.Authentication;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using PathPilot.Modules.Users.Core.DTO;
 using PathPilot.Modules.Users.Core.Entities;
 using PathPilot.Modules.Users.Core.Exceptions;
@@ -45,11 +44,11 @@ internal sealed class IdentityService(
     public async Task<JsonWebToken> SignInAsync(SignInDto dto)
     {
         var user = await userRepository.GetAsync(dto.Email.ToLowerInvariant())
-                   ?? throw new InvalidCredentialException();
+                   ?? throw new InvalidCredentialsException();
 
         if (passwordHasher.VerifyHashedPassword(default, user.Password, dto.Password)
             == PasswordVerificationResult.Failed)
-            throw new InvalidCredentialException();
+            throw new InvalidCredentialsException();
 
         if (!user.IsActive)
             throw new UserNotActiveException(user.Id);
