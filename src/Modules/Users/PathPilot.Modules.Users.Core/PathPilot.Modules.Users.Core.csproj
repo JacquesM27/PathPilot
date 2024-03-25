@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <InternalsVisibleTo Include="PathPilot.Modules.Users.Tests.Unit"/>
+        <InternalsVisibleTo Include="PathPilot.Modules.Users.Tests.Integration"/>
         <InternalsVisibleTo Include="PathPilot.Modules.Users.Api"/>
     </ItemGroup>
 

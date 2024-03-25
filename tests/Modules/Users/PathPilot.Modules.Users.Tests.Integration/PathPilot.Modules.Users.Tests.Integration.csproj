@@ -9,6 +9,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\PathPilot.Shared.Tests\PathPilot.Shared.Tests.csproj" />
+        <ProjectReference Include="..\PathPilot.Modules.Users.Tests.Unit\PathPilot.Modules.Users.Tests.Unit.csproj" />
     </ItemGroup>
 
     <ItemGroup>
