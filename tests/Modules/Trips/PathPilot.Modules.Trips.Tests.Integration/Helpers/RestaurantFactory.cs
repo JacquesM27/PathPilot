@@ -12,6 +12,7 @@ public static class RestaurantFactory
             name: "Restaurant 1",
             description: "Description for Restaurant 1",
             cuisineType: "Cuisine Type 1",
+            ownerId: Guid.NewGuid(),
             address: new Address("City 1", "Main St 1", "123", "12345", "Country 1"),
             menuItems: new List<MenuItem>
             {
@@ -25,6 +26,7 @@ public static class RestaurantFactory
             name: "Restaurant 2",
             description: "Description for Restaurant 2",
             cuisineType: "Cuisine Type 2",
+            ownerId: Guid.NewGuid(),
             address: new Address("City 2", "Elm St 2", "456", "54321", "Country 2", 1.2345m, 2.3456m),
             menuItems: new List<MenuItem>
             {
@@ -37,12 +39,13 @@ public static class RestaurantFactory
         return [restaurant1, restaurant2];
     }
 
-    public static Restaurant CreateRestaurant()
+    public static Restaurant CreateRestaurant(Guid ownerId)
     {
         var restaurant = Restaurant.CreateDetailed(
             name: "Restaurant 3",
             description: "Description for Restaurant 3",
             cuisineType: "Cuisine Type 3",
+            ownerId: ownerId,
             address: new Address("City 3", "Main St 1", "123", "12345", "Country 1"),
             menuItems: new List<MenuItem>
             {

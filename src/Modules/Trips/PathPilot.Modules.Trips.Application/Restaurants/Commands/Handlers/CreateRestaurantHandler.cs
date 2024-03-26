@@ -10,7 +10,7 @@ internal sealed class CreateRestaurantHandler(
 {
     public async Task HandleAsync(CreateRestaurant command)
     {
-        var restaurant = Restaurant.Create(command.Name, command.Description, command.CuisineType);
+        var restaurant = Restaurant.Create(command.Name, command.Description, command.CuisineType, command.OwnerId);
 
         await restaurantRepository.AddAsync(restaurant);
         command.Id = restaurant.Id;

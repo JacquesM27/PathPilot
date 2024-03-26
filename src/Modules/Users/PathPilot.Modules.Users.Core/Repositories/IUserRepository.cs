@@ -7,6 +7,6 @@ namespace PathPilot.Modules.Users.Core.Repositories;
 public interface IUserRepository
 {
     Task<User?> GetAsync(EntityId id);
-    Task<User?> GetAsync(Email email);
+    Task<User?> GetAsync(string email);
     Task AddAsync(User user);
 }

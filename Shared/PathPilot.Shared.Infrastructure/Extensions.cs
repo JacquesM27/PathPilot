@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,7 @@ using PathPilot.Shared.Infrastructure.Modules;
 using PathPilot.Shared.Infrastructure.Mongo;
 using PathPilot.Shared.Infrastructure.Queries;
 using PathPilot.Shared.Infrastructure.Storage;
+using Swashbuckle.AspNetCore.Filters;
 
 [assembly:InternalsVisibleTo("PathPilot.Bootstrapper")]
 namespace PathPilot.Shared.Infrastructure;
@@ -94,6 +96,14 @@ internal static class Extensions
                 Title = "PathPilot API",
                 Version = "v1"
             });
+            swagger.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            {
+                Description = "Standard Auth header - use Bearer scheme: \"Bearer {token}\"",
+                In = ParameterLocation.Header,
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey
+            });
+            swagger.OperationFilter<SecurityRequirementsOperationFilter>();
         });
         return services;
     }

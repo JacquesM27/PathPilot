@@ -10,10 +10,11 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Infrastructure.MongoDbMappings;
 public class RestaurantMappingsTests
 {
     [Fact]
-    public void ToDocuments_ShouldMapRestaurantToDocument()
+    public void ToDocument_ShouldMapRestaurantToDocument()
     {
         // Arrange
         var restaurantId = Guid.NewGuid();
+        var ownerId = Guid.NewGuid();
         var restaurant = new Restaurant(
             new EntityId(restaurantId),
             new RestaurantName("Restaurant Name"),
@@ -21,6 +22,7 @@ public class RestaurantMappingsTests
             true,
             4.5,
             "Italian",
+            ownerId,
             new Address("City", "Street", "123", "12345", "Country"),
             new List<MenuItem>
             {
@@ -36,6 +38,7 @@ public class RestaurantMappingsTests
         document.Name.ShouldBe("Restaurant Name");
         document.Description.ShouldBe("Restaurant Description");
         document.IsOpened.ShouldBeTrue();
+        document.OwnerId.ShouldBe(ownerId);
         document.AverageRate.ShouldBe(4.5);
         document.CuisineType.ShouldBe("Italian");
         document.Address.City.ShouldBe("City");
@@ -50,7 +53,7 @@ public class RestaurantMappingsTests
     }
 
     [Fact]
-    public void ToDocuments_ShouldMapNullAddressAndMenuItemsToEmptyList()
+    public void ToDocument_ShouldMapNullAddressAndMenuItemsToEmptyList()
     {
         // Arrange
         var restaurant = new Restaurant(
@@ -59,7 +62,8 @@ public class RestaurantMappingsTests
             new RestaurantDescription("Restaurant Description"),
             true,
             4.5,
-            "Italian");
+            "Italian",
+            Guid.NewGuid());
 
         // Act
         var document = restaurant.ToDocument();
@@ -82,6 +86,7 @@ public class RestaurantMappingsTests
             IsOpened = true,
             AverageRate = 4.5,
             CuisineType = "Italian",
+            OwnerId = Guid.NewGuid(),
             Address = new AddressDocument
             {
                 City = "City",
@@ -106,6 +111,7 @@ public class RestaurantMappingsTests
         restaurant.Name.ShouldBe(new RestaurantName("Restaurant Name"));
         restaurant.Description.ShouldBe(new RestaurantDescription("Restaurant Description"));
         restaurant.IsOpened.ShouldBeTrue();
+        restaurant.Owner.Value.ShouldBe(document.OwnerId);
         restaurant.AverageRate.ShouldBe(4.5);
         restaurant.CuisineType.Value.ShouldBe("Italian");
         restaurant.Address.ShouldNotBeNull();
@@ -133,7 +139,8 @@ public class RestaurantMappingsTests
             Description = "Restaurant Description",
             IsOpened = true,
             AverageRate = 4.5,
-            CuisineType = "Italian"
+            CuisineType = "Italian",
+            OwnerId = Guid.NewGuid()
         };
 
         // Act
@@ -145,5 +152,6 @@ public class RestaurantMappingsTests
         restaurant.Address.ShouldBeNull();
         restaurant.MenuItems.ShouldNotBeNull();
         restaurant.MenuItems.ShouldBeEmpty();
+        restaurant.Owner.Value.ShouldBe(document.OwnerId);
     }
 }

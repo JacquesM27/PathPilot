@@ -10,7 +10,7 @@ internal static class RestaurantHelper
         const string name = "Pasta Italiano";
         const string description = "Description of the restaurant";
         var cuisine = CuisineType.Italian;
-        var restaurant = Restaurant.Create(name, description, cuisine);
+        var restaurant = Restaurant.Create(name, description, cuisine, Guid.NewGuid());
         return restaurant;
     }
 
@@ -19,8 +19,8 @@ internal static class RestaurantHelper
         var restaurants = new List<Restaurant>
         {
             GetRestaurant(),
-            Restaurant.Create("Burger Palace", "Home of delicious burgers", CuisineType.Chinese),
-            Restaurant.Create("Sushi Delight", "Authentic Japanese sushi experience", CuisineType.Polish)
+            Restaurant.Create("Burger Palace", "Home of delicious burgers", CuisineType.Chinese, Guid.NewGuid()),
+            Restaurant.Create("Sushi Delight", "Authentic Japanese sushi experience", CuisineType.Polish, Guid.NewGuid())
         };
 
         return restaurants;

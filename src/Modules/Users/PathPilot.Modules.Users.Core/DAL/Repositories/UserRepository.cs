@@ -21,9 +21,9 @@ internal sealed class UserRepository(UsersMongoContext context) : IUserRepositor
         return document.FromDocument();
     }
 
-    public async Task<User?> GetAsync(Email email)
+    public async Task<User?> GetAsync(string email)
     {
-        var filter = _filterBuilder.Eq(u => u.Email, email.Value);
+        var filter = _filterBuilder.Eq(u => u.Email, email);
         var document = await _collection.Find(filter).FirstOrDefaultAsync();
         return document.FromDocument();
     }

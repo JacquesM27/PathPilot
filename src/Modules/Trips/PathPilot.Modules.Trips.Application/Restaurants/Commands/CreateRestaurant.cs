@@ -1,8 +1,15 @@
-﻿using PathPilot.Shared.Abstractions.Commands;
+﻿using System.Text.Json.Serialization;
+using PathPilot.Shared.Abstractions.Commands;
 
 namespace PathPilot.Modules.Trips.Application.Restaurants.Commands;
 
-public sealed record CreateRestaurant(string Name, string Description, string CuisineType) : ICommand
+public sealed class CreateRestaurant(string name, string description, string cuisineType) : ICommand
 {
+    public string Name { get; } = name;
+    public string Description { get; } = description;
+    public string CuisineType { get; } = cuisineType;
+    [JsonIgnore]
+    public Guid OwnerId { get; set; }
+    [JsonIgnore]
     public Guid Id { get; set; }
 }

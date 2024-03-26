@@ -13,6 +13,7 @@ internal sealed class RestaurantDocument
     public bool IsOpened { get; set; }
     public double AverageRate { get; set; }
     public string CuisineType { get; set; }
+    public Guid OwnerId { get; set; }
     public AddressDocument Address { get; set; }
     public List<MenuItemDocument> MenuItems { get; set; }
 }

@@ -11,7 +11,7 @@ public class RestaurantMappingTests
         public void ToDto_Should_Map_Restaurant_To_RestaurantDto()
         {
             // Arrange
-            var restaurant = Restaurant.Create("Restaurant Name", "Restaurant Description", "Italian");
+            var restaurant = Restaurant.Create("Restaurant Name", "Restaurant Description", "Italian", Guid.NewGuid());
 
             // Act
             var dto = restaurant.ToDto();
@@ -29,7 +29,7 @@ public class RestaurantMappingTests
         public void ToDetailsDto_Should_Map_Restaurant_To_RestaurantDetailsDto_With_Null_Address_And_MenuItems()
         {
             // Arrange
-            var restaurant = Restaurant.Create("Restaurant Name", "Restaurant Description", "Italian");
+            var restaurant = Restaurant.Create("Restaurant Name", "Restaurant Description", "Italian", Guid.NewGuid());
 
             // Act
             var dto = restaurant.ToDetailsDto();
@@ -55,7 +55,7 @@ public class RestaurantMappingTests
                 new("Pizza", "Delicious pizza", 10.99),
                 new("Burger", "Tasty burger", 8.99)
             };
-            var restaurant = Restaurant.CreateDetailed("Restaurant Name", "Restaurant Description", "Italian", address, menuItems);
+            var restaurant = Restaurant.CreateDetailed("Restaurant Name", "Restaurant Description", "Italian", Guid.NewGuid(), address, menuItems);
 
             // Act
             var dto = restaurant.ToDetailsDto();

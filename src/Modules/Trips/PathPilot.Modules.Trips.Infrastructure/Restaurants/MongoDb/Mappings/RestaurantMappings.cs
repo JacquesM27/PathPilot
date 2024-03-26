@@ -15,6 +15,7 @@ internal static class RestaurantMappings
             IsOpened = restaurant.IsOpened,
             AverageRate = restaurant.AverageRate,
             CuisineType = restaurant.CuisineType,
+            OwnerId = restaurant.Owner,
             Address = restaurant.Address.ToDocument(),
             MenuItems = restaurant.MenuItems.ToDocument().ToList()
         };
@@ -39,6 +40,7 @@ internal static class RestaurantMappings
             document.IsOpened,
             document.AverageRate,
             document.CuisineType,
+            document.OwnerId,
             document.Address.FromDocument(),
             document.MenuItems.FromDocument()
         );

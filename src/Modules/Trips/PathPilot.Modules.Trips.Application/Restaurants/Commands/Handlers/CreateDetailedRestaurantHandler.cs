@@ -21,7 +21,8 @@ internal sealed class CreateDetailedRestaurantHandler(
         
         var items = command.Items ?? [];
         
-        var restaurant = Restaurant.CreateDetailed(command.Name, command.Description, command.CuisineType, address, 
+        var restaurant = Restaurant.CreateDetailed(command.Name, command.Description, command.CuisineType,
+            command.OwnerId, address, 
             items.MapToMenuItems());
 
         await restaurantRepository.AddAsync(restaurant);

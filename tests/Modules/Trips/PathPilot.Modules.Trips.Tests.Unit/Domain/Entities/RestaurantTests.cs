@@ -26,7 +26,7 @@ public class RestaurantTests
         var cuisine = CuisineType.Italian;
 
         // Act
-        var exception = Record.Exception(() => Restaurant.Create(name, description, cuisine));
+        var exception = Record.Exception(() => Restaurant.Create(name, description, cuisine, Guid.NewGuid()));
         
         // Arrange
         exception.ShouldNotBeNull();
@@ -42,7 +42,7 @@ public class RestaurantTests
         var cuisine = CuisineType.Italian;
 
         // Act
-        var restaurant = Restaurant.Create(name, description, cuisine);
+        var restaurant = Restaurant.Create(name, description, cuisine, Guid.NewGuid());
         
         // Arrange
         restaurant.Name.Value.ShouldBe(name);
