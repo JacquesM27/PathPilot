@@ -2,6 +2,7 @@
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
 using PathPilot.Modules.Trips.Application.Restaurants.Events;
 using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
+using PathPilot.Modules.Trips.Application.Restaurants.Policies;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Tests.Helpers;
@@ -21,7 +22,9 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
         {
             _restaurantRepository = Substitute.For<IRestaurantRepository>();
             _messageBroker = Substitute.For<IMessageBroker>();
-            _commandHandler = new UpdateAddressHandler(_restaurantRepository, _messageBroker);
+            var restaurantManagementPolicy = new RestaurantManagementPolicy();
+            _commandHandler = new UpdateAddressHandler(_restaurantRepository, _messageBroker, 
+                restaurantManagementPolicy);
             _restaurant = RestaurantHelper.GetRestaurant();
         }
         
@@ -39,7 +42,10 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
                 "123",
                 "10001",
                 "USA"
-            );
+            )
+            {
+                UserId = RestaurantHelper.OwnerId
+            };
             _restaurantRepository.GetAsync(command.RestaurantId).Returns(_restaurant);
 
             // Act
@@ -64,6 +70,35 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
                 message.Country == command.Country
             ));
         }
+        
+        [Fact]
+        public async Task HandleAsync_ShouldThrowCannotManageRestaurantException_WhenUserIsNotOwner()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var command = new UpdateAddress(
+                id,
+                "New York",
+                "Broadway",
+                "123",
+                "10001",
+                "USA"
+            )
+            {
+                UserId = Guid.NewGuid()
+            };
+            _restaurantRepository.GetAsync(command.RestaurantId).Returns(_restaurant);
+
+            // Act
+            var exception = await Record.ExceptionAsync(() => Act(command));
+
+            // Assert
+            await _restaurantRepository.Received(1).GetAsync(id);
+            await _restaurantRepository.Received(0).UpdateAsync(default!);
+            await _messageBroker.Received(0).PublishAsync(default!);
+            exception.ShouldNotBeNull();
+            exception.ShouldBeOfType<CannotManageRestaurantException>();
+        }
 
         [Fact]
         public async Task HandleAsync_ShouldThrowRestaurantNotFoundException_WhenRestaurantNotFound()
@@ -77,7 +112,10 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
                 "123",
                 "10001",
                 "USA"
-            );
+            )
+            {
+                UserId = RestaurantHelper.OwnerId
+            };
             _restaurantRepository.GetAsync(command.RestaurantId)!.Returns((Restaurant)null!);
 
             // Act

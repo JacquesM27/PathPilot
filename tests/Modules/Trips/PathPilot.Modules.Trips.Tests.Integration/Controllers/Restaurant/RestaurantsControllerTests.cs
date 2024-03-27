@@ -162,6 +162,26 @@ public class RestaurantsControllerTests:
     }
     
     [Fact]
+    public async Task CloseAsync_ShouldReturnBadRequest_WhenUserIsNotRestaurantOwner()
+    {
+        // Arrange
+        var userId = Guid.NewGuid();
+        var ownerId = Guid.NewGuid();
+        var restaurant = RestaurantFactory.CreateRestaurant(ownerId);
+        await _restaurantRepository.AddAsync(restaurant);
+        Authenticate(userId);
+
+        // Act
+        var response = await _client.PutAsync($"{Path}/close/{restaurant.Id.Value}",null);
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        var restaurantUpdated = await _restaurantRepository.GetAsync(restaurant.Id.Value);
+        restaurantUpdated.ShouldNotBeNull();
+        restaurantUpdated.IsOpened.ShouldBeTrue();
+    }
+    
+    [Fact]
     public async Task OpenAsync_ShouldReturnUnauthorized_WithoutAuthorization()
     {
         // Arrange
@@ -179,6 +199,27 @@ public class RestaurantsControllerTests:
         var restaurantUpdated = await _restaurantRepository.GetAsync(restaurant.Id.Value);
         restaurantUpdated.ShouldNotBeNull();
         restaurantUpdated.IsOpened.ShouldBeTrue();
+    }
+    
+    [Fact]
+    public async Task OpenAsync_ShouldReturnBadRequest_WhenUserIsNotRestaurantOwner()
+    {
+        // Arrange
+        var userId = Guid.NewGuid();
+        var ownerId = Guid.NewGuid();
+        var restaurant = RestaurantFactory.CreateRestaurant(ownerId);
+        restaurant.Close();
+        await _restaurantRepository.AddAsync(restaurant);
+        Authenticate(userId);
+
+        // Act
+        var response = await _client.PutAsync($"{Path}/open/{restaurant.Id.Value}",null);
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+        var restaurantUpdated = await _restaurantRepository.GetAsync(restaurant.Id.Value);
+        restaurantUpdated.ShouldNotBeNull();
+        restaurantUpdated.IsOpened.ShouldBeFalse();
     }
     
     [Fact]
@@ -291,6 +332,41 @@ public class RestaurantsControllerTests:
     }
     
     [Fact]
+    public async Task UpdateAddressAsync_ShouldReturnBadRequest_WhenUserIsNotRestaurantOwner()
+    {
+        // Arrange
+        var userId = Guid.NewGuid();
+        var ownerId = Guid.NewGuid();
+        Authenticate(userId);
+        var restaurant = RestaurantFactory.CreateRestaurant(ownerId);
+        await _restaurantRepository.AddAsync(restaurant);
+
+        var updateAddressCommand = new UpdateAddress(
+            restaurant.Id,
+            "New City",
+            "New Street",
+            "456",
+            "54321",
+            "New Country"
+        );
+
+        // Act
+        var response = await _client.PutAsJsonAsync($"{Path}/new-address", updateAddressCommand);
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+
+        // Check if address was updated
+        var updatedRestaurant = await _restaurantRepository.GetAsync(restaurant.Id);
+        updatedRestaurant.ShouldNotBeNull();
+        updatedRestaurant.Address.City.ShouldNotBe("New City");
+        updatedRestaurant.Address.Street.ShouldNotBe("New Street");
+        updatedRestaurant.Address.BuildingNumber.ShouldNotBe("456");
+        updatedRestaurant.Address.PostCode.ShouldNotBe("54321");
+        updatedRestaurant.Address.Country.ShouldNotBe("New Country");
+    }
+    
+    [Fact]
     public async Task UpdateAddressAsync_ShouldReturnNoContent_WhenAddressIsUpdated()
     {
         // Arrange
@@ -348,6 +424,35 @@ public class RestaurantsControllerTests:
 
         // Assert
         response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+    }
+    
+    [Fact]
+    public async Task UpdateMenuAsync_ShouldReturnBadRequest_WhenUserIsNotRestaurantOwner()
+    {
+        // Arrange
+        var userId = Guid.NewGuid();
+        var ownerId = Guid.NewGuid();
+        Authenticate(userId);
+        var restaurant = RestaurantFactory.CreateRestaurant(ownerId);
+        await _restaurantRepository.AddAsync(restaurant);
+
+        var newMenuItems = new List<MenuItemRecord>
+        {
+            new ("New Item 1", "New Description 1", 15.99),
+            new ("New Item 2", "New Description 2", 12.99),
+            new ("New Item 3", "New Description 3", 18.49)
+        };
+
+        var updateMenuCommand = new UpdateMenu(
+            restaurant.Id,
+            newMenuItems
+        );
+
+        // Act
+        var response = await _client.PutAsJsonAsync($"{Path}/new-menu", updateMenuCommand);
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
     }
     
     [Fact]

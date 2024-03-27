@@ -20,5 +20,5 @@ public sealed class CreateDetailedRestaurant(string name, string description, st
     [JsonIgnore]
     public Guid Id { get; set; }
     [JsonIgnore]
-    public Guid OwnerId { get; set; }
+    public Guid UserId { get; set; }
 }

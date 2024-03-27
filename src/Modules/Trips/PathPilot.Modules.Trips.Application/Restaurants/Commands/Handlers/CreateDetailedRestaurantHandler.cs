@@ -11,7 +11,7 @@ namespace PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
 internal sealed class CreateDetailedRestaurantHandler(
     IRestaurantRepository restaurantRepository,
     IMessageBroker messageBroker
-) : ICommandHandler<CreateDetailedRestaurant>
+    ) : ICommandHandler<CreateDetailedRestaurant>
 {
     public async Task HandleAsync(CreateDetailedRestaurant command)
     {
@@ -22,7 +22,7 @@ internal sealed class CreateDetailedRestaurantHandler(
         var items = command.Items ?? [];
         
         var restaurant = Restaurant.CreateDetailed(command.Name, command.Description, command.CuisineType,
-            command.OwnerId, address, 
+            command.UserId, address, 
             items.MapToMenuItems());
 
         await restaurantRepository.AddAsync(restaurant);

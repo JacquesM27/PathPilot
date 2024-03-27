@@ -15,7 +15,6 @@ internal class RestaurantsController(
     IContext context
     ) : BaseController
 {
-    //TODO: add policy only for owner - when user module will be completed
     [HttpGet("{id:guid}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(404)]
@@ -33,7 +32,7 @@ internal class RestaurantsController(
     [ProducesResponseType(401)]
     public async Task<ActionResult> AddAsync(CreateRestaurant command)
     {
-        command.OwnerId = context.Identity.Id;
+        command.UserId = context.Identity.Id;
         await commandDispatcher.SendAsync(command);
         return CreatedAtAction(nameof(Get), new { id = command.Id }, null);
     }
@@ -44,7 +43,7 @@ internal class RestaurantsController(
     [ProducesResponseType(401)]
     public async Task<ActionResult> AddAsync(CreateDetailedRestaurant command)
     {
-        command.OwnerId = context.Identity.Id;
+        command.UserId = context.Identity.Id;
         await commandDispatcher.SendAsync(command);
         return CreatedAtAction(nameof(Get), new { id = command.Id }, null);
     }
@@ -56,7 +55,7 @@ internal class RestaurantsController(
     [ProducesResponseType(404)]
     public async Task<ActionResult> CloseAsync(Guid id)
     {
-        await commandDispatcher.SendAsync(new CloseRestaurant(id));
+        await commandDispatcher.SendAsync(new CloseRestaurant(id, context.Identity.Id));
         return NoContent();
     }
     
@@ -67,7 +66,7 @@ internal class RestaurantsController(
     [ProducesResponseType(404)]
     public async Task<ActionResult> OpenAsync(Guid id)
     {
-        await commandDispatcher.SendAsync(new OpenRestaurant(id));
+        await commandDispatcher.SendAsync(new OpenRestaurant(id, context.Identity.Id));
         return NoContent();
     }
 
@@ -78,6 +77,7 @@ internal class RestaurantsController(
     [ProducesResponseType(404)]
     public async Task<ActionResult> UpdateAddressAsync(UpdateAddress command)
     {
+        command.UserId = context.Identity.Id;
         await commandDispatcher.SendAsync(command);
         return NoContent();
     }
@@ -89,6 +89,7 @@ internal class RestaurantsController(
     [ProducesResponseType(404)]
     public async Task<ActionResult> UpdateMenuAsync(UpdateMenu command)
     {
+        command.UserId = context.Identity.Id;
         await commandDispatcher.SendAsync(command);
         return NoContent();
     }

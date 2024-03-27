@@ -2,6 +2,7 @@
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Shared;
 using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
+using PathPilot.Modules.Trips.Application.Restaurants.Policies;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Tests.Helpers;
@@ -18,7 +19,8 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
         public UpdateMenuHandlerTests()
         {
             _restaurantRepository = Substitute.For<IRestaurantRepository>();
-            _commandHandler = new UpdateMenuHandler(_restaurantRepository);
+            var restaurantManagementPolicy = new RestaurantManagementPolicy();
+            _commandHandler = new UpdateMenuHandler(_restaurantRepository, restaurantManagementPolicy);
             _restaurant = RestaurantHelper.GetRestaurant();
         }
 
@@ -33,10 +35,13 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
                 id,
                 new List<MenuItemRecord>
                 {
-                    new ("Pizza", "Delicious pizza", 10.99),
-                    new ("Burger", "Tasty burger", 8.99)
+                    new("Pizza", "Delicious pizza", 10.99),
+                    new("Burger", "Tasty burger", 8.99)
                 }
-            );
+            )
+            {
+                UserId = RestaurantHelper.OwnerId
+            };
             _restaurantRepository.GetAsync(command.RestaurantId).Returns(_restaurant);
 
             // Act
@@ -77,6 +82,34 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
             exception.ShouldNotBeNull();
             exception.ShouldBeOfType<RestaurantNotFoundException>();
         }
+
+        [Fact]
+        public async Task HandleUpdateMenu_ShouldThrowCannotManageRestaurantException_WhenUserIsNotOwner()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var command = new UpdateMenu(
+                id,
+                new List<MenuItemRecord>
+                {
+                    new ("Pizza", "Delicious pizza", 10.99),
+                    new ("Burger", "Tasty burger", 8.99)
+                }
+            )
+            {
+                UserId = Guid.NewGuid()
+            };
+            _restaurantRepository.GetAsync(command.RestaurantId).Returns(_restaurant);
+
+            // Act
+            var exception = await Record.ExceptionAsync(() => Act(command));
+
+            // Assert
+            await _restaurantRepository.Received(1).GetAsync(id);
+            await _restaurantRepository.Received(0).UpdateAsync(default!);
+            exception.ShouldNotBeNull();
+            exception.ShouldBeOfType<CannotManageRestaurantException>();
+        }
         
         [Fact]
         public async Task HandleUpdateMenu_ShouldUpdateMenu()
@@ -90,15 +123,18 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
                 menuItem1,
                 menuItem2
             ]);
-            
+
             var command = new UpdateMenu(
                 id,
                 new List<MenuItemRecord>
                 {
-                    new ("Pizza", "Updated pizza description", 11.99),
-                    new ("Pasta", "Delicious pasta", 12.99),
+                    new("Pizza", "Updated pizza description", 11.99),
+                    new("Pasta", "Delicious pasta", 12.99),
                 }
-            );
+            )
+            {
+                UserId = RestaurantHelper.OwnerId
+            };
 
 
             _restaurantRepository.GetAsync(command.RestaurantId).Returns(_restaurant);
@@ -139,7 +175,10 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
             var command = new UpdateMenu(
                 id,
                 []
-            );
+            )
+            {
+                UserId = RestaurantHelper.OwnerId
+            };
         
             _restaurantRepository.GetAsync(command.RestaurantId).Returns(_restaurant);
         

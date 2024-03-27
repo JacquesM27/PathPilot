@@ -9,7 +9,7 @@ public sealed class CreateRestaurant(string name, string description, string cui
     public string Description { get; } = description;
     public string CuisineType { get; } = cuisineType;
     [JsonIgnore]
-    public Guid OwnerId { get; set; }
-    [JsonIgnore]
     public Guid Id { get; set; }
+    [JsonIgnore]
+    public Guid UserId { get; set; }
 }

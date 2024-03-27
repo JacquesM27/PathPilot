@@ -1,6 +1,7 @@
 ﻿using PathPilot.Modules.Trips.Application.Restaurants.Commands;
 using PathPilot.Modules.Trips.Application.Restaurants.Commands.Handlers;
 using PathPilot.Modules.Trips.Application.Restaurants.Exceptions;
+using PathPilot.Modules.Trips.Application.Restaurants.Policies;
 using PathPilot.Modules.Trips.Domain.Restaurants.Entities;
 using PathPilot.Modules.Trips.Domain.Restaurants.Repositories;
 using PathPilot.Modules.Trips.Domain.Tests.Helpers;
@@ -17,7 +18,8 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
         public CloseRestaurantHandlerTests()
         {
             _restaurantRepository = Substitute.For<IRestaurantRepository>();
-            _commandHandler = new CloseRestaurantHandler(_restaurantRepository);
+            var restaurantManagementPolicy = new RestaurantManagementPolicy();
+            _commandHandler = new CloseRestaurantHandler(_restaurantRepository, restaurantManagementPolicy);
             _restaurant = RestaurantHelper.GetRestaurant();
         }
         
@@ -28,7 +30,7 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
         {
             // Arrange
             var id = Guid.NewGuid();
-            var command = new CloseRestaurant(id);
+            var command = new CloseRestaurant(id, Guid.NewGuid());
             
             // Act
             var exception = await Record.ExceptionAsync(() => Act(command));
@@ -39,13 +41,31 @@ namespace PathPilot.Modules.Trips.Domain.Tests.Application.Commands.Handlers
             await _restaurantRepository.Received(1).GetAsync(id);
             await _restaurantRepository.Received(0).UpdateAsync(default);
         }
+        
+        [Fact]
+        public async Task HandleCloseRestaurant_ShouldThrowCannotManageRestaurantException_WhenUserIsNotOwner()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            var command = new CloseRestaurant(id, Guid.NewGuid());
+            _restaurantRepository.GetAsync(id).Returns(_restaurant);
+            
+            // Act
+            var exception = await Record.ExceptionAsync(() => Act(command));
+
+            // Assert        
+            exception.ShouldNotBeNull();
+            exception.ShouldBeOfType<CannotManageRestaurantException>();
+            await _restaurantRepository.Received(1).GetAsync(id);
+            await _restaurantRepository.Received(0).UpdateAsync(default);
+        }
 
         [Fact]
         public async Task HandleCloseRestaurant_ShouldCloseRestaurant()
         {
             // Arrange
             var id = Guid.NewGuid();
-            var command = new CloseRestaurant(id);
+            var command = new CloseRestaurant(id, RestaurantHelper.OwnerId);
             _restaurantRepository.GetAsync(id).Returns(_restaurant);
             
             // Act
