@@ -11,7 +11,7 @@ public sealed class Restaurant
     public RestaurantName Name { get; private set; }
     public RestaurantDescription Description { get; private set; }
     public bool IsOpened { get; private set; }
-    public double AverageRate { get; private set; }
+    public double AverageRate { get; private set; }//TODO: Add number of rating
     public CuisineType CuisineType { get; private set; }
     public UserId Owner { get; private set; }
     public Address? Address { get; private set; }
