@@ -21,8 +21,8 @@ I've conducted an Event Storming session to gather insights and refine the featu
 Below is an overview of the modules included in PathPilot:
 
 - [ ] **User Management Module**:
-    - [ ] Handles user registration, login, and account management.
-    - [ ] Provides authentication and authorization services.
+    - [x] Handles user registration, login, and account management.
+    - [x] Provides authentication and authorization services.
     - [ ] Manages user profiles and preferences.
 
 - [ ] **Trip Planning Module**:
@@ -39,7 +39,9 @@ Below is an overview of the modules included in PathPilot:
     - [ ] Provides a list of available accommodations.
 
 - [ ] **Restaurants Module**:
-    - [ ] Offers a selection of restaurants for users to explore.
+    - [x] Offers a selection of restaurants for users to explore.
+    - [x] Offers the ability to add and manage a restaurant.
+    - [ ] Offers filter-based search and pagination
 
 - [ ] **Reviews Module**:
     - [ ] Manages user ratings and reviews for attractions, accommodations, and restaurants.
