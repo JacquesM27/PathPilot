@@ -13,5 +13,9 @@
     <ItemGroup>
         <InternalsVisibleTo Include="PathPilot.Modules.Trips.Tests.Unit"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Accommodations\" />
+    </ItemGroup>
     
 </Project>

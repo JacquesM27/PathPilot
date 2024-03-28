@@ -1,9 +1,9 @@
-﻿using PathPilot.Modules.Trips.Domain.Accommodation.Exceptions;
-using PathPilot.Modules.Trips.Domain.Accommodation.ValueObjects;
+﻿using PathPilot.Modules.Trips.Domain.Accommodations.Exceptions;
+using PathPilot.Modules.Trips.Domain.Accommodations.ValueObjects;
 using PathPilot.Modules.Trips.Domain.ValueObjects;
 using PathPilot.Shared.Abstractions.Kernel.Types;
 
-namespace PathPilot.Modules.Trips.Domain.Accommodation.Entities;
+namespace PathPilot.Modules.Trips.Domain.Accommodations.Entities;
 
 public sealed class Accommodation
 {

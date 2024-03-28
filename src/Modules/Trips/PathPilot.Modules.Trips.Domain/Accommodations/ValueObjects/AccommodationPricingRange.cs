@@ -1,6 +1,6 @@
-﻿using PathPilot.Modules.Trips.Domain.Accommodation.Exceptions;
+﻿using PathPilot.Modules.Trips.Domain.Accommodations.Exceptions;
 
-namespace PathPilot.Modules.Trips.Domain.Accommodation.ValueObjects;
+namespace PathPilot.Modules.Trips.Domain.Accommodations.ValueObjects;
 
 public sealed record AccommodationPricingRange
 {
